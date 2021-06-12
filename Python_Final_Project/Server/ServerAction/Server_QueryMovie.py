@@ -1,6 +1,6 @@
 from DB.MovieData_Table import MovieData_Table
 from DB.MovieID_map_Table import MovieID_map_Table
-import json
+#import json
 
 class Server_QueryMovie:
     
@@ -48,7 +48,7 @@ class Server_QueryMovie:
             print("The exception {} occurs.".format(e))
 
         if(status == True): 
-            reply_msg = {'status': "OK", 'parameters': json.dumps(movie_list)}    #回傳欲query查詢的學生資訊 Nested Dictionary
+            reply_msg = {'status': "OK", 'parameters': movie_list}    #回傳欲query查詢的學生資訊 Nested Dictionary
         else:
-            reply_msg = {'status': "Fail", 'parameters': json.dumps(movie_list), 'reason': "The id is not found."}
+            reply_msg = {'status': "Fail", 'parameters': movie_list, 'reason': "The id is not found."}
         return reply_msg

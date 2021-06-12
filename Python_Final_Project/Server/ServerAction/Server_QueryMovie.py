@@ -1,5 +1,6 @@
 from DB.MovieData_Table import MovieData_Table
 from DB.MovieID_map_Table import MovieID_map_Table
+import json
 
 class Server_QueryMovie:
     
@@ -26,7 +27,6 @@ class Server_QueryMovie:
                 Movie_Genres = MovieData_Table().select_a_Movie_Genres(info["id"])
                 Movie_release_date = MovieData_Table().select_a_Movie_release_date(info["id"])
                 Movie_Cast = MovieData_Table().select_a_Movie_Cast(info["id"])
-                Movie_Crew = MovieData_Table().select_a_Movie_Crew(info["id"])
                 
                 Movie_dict["id"] = info["id"] # Movie's id (from MovieData_Table)
                 Movie_dict["movieId"] = movie_movieId[0]# Movie's movieId (from Ratings_Table、MovieID_map_Table)
@@ -37,7 +37,6 @@ class Server_QueryMovie:
                 Movie_dict["genres"] = Movie_Genres[0]
                 Movie_dict["release_date"] = Movie_release_date[0]
                 Movie_dict["cast"] = Movie_Cast[0]
-                Movie_dict["crew"] = Movie_Crew[0]
                 
                 
 
@@ -49,7 +48,7 @@ class Server_QueryMovie:
             print("The exception {} occurs.".format(e))
 
         if(status == True): 
-            reply_msg = {'status': "OK", 'parameters': movie_list}    #回傳欲query查詢的學生資訊 Nested Dictionary
+            reply_msg = {'status': "OK", 'parameters': json.dumps(movie_list)}    #回傳欲query查詢的學生資訊 Nested Dictionary
         else:
-            reply_msg = {'status': "Fail", 'parameters': movie_list, 'reason': "The id is not found."}
+            reply_msg = {'status': "Fail", 'parameters': json.dumps(movie_list), 'reason': "The id is not found."}
         return reply_msg

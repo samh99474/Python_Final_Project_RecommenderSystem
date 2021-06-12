@@ -2,11 +2,13 @@ from SocketClient.Socket_Client import SocketClient
 from AddUser import AddUser
 from Get_Movie_RS import Get_Movie_RS
 from Rating import Rating
+from QueryMovie import QueryMovie
 
 action_list = {
     "add": AddUser,
     "RS" : Get_Movie_RS,
-    "rating": Rating
+    "rating": Rating,
+    "QueryMovie": QueryMovie
 }
 
 #======================================================================
@@ -15,11 +17,11 @@ def print_menu():
         print("add: Add a user's name")
         print("RS: Get Movie Recommemdation")
         print("rating: rating a Movie")
+        print("QueryMovie: Query a Movie")
         print("exit: Exit")
         selection = input("Please select: ")
 
         return selection
-
 #================================================================
 
 def main():

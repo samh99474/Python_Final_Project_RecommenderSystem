@@ -1,3 +1,4 @@
+Python Class - Recommender System
 1. 開啟server資料夾:
 在cmd打:python main_server.py
 即可開啟local伺服器

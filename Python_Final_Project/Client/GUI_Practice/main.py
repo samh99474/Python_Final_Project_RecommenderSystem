@@ -77,6 +77,7 @@ class MainWindow(QMainWindow):
         widgets.btn_save.clicked.connect(self.buttonClick)
         widgets.btn_exit.clicked.connect(self.buttonClick)
         widgets.tableWidget_home.cellClicked.connect(self.click_tableWidget_home)
+        widgets.tableWidget_NP.cellClicked.connect(self.click_tableWidget_NP)
         """
         item_test = QTableWidgetItem()  #要先設置item，在放進去table
         item_test.setText("123")
@@ -256,9 +257,9 @@ class MainWindow(QMainWindow):
 
         #點按鈕才跳畫面
 
-    def update_tableWidget_NP(self):
+    def update_tableWidget_NP(self, name_movie = None, id_movie = None):
         client = SocketClient()
-        result = action_list["RS"](client).execute()
+        result = action_list["RS"](client).execute(name_movie, id_movie)
         print("result : {}".format(result))
         #tableWidget_NP的初始化畫面
         #parameters
@@ -283,6 +284,45 @@ class MainWindow(QMainWindow):
             print(text_show_movie_info)
             widgets.tableWidget_NP.item(i, 1).setText(text_show_movie_info)
         #tableWidget_NP的初始化畫面
+    
+    def click_tableWidget_NP(self, row, col):
+        sf = "You clicked on [{},{}]".format(row,col) 
+        print(sf) 
+
+        client = SocketClient()
+
+        #取出tableWidget_NP的資訊
+        text = widgets.tableWidget_NP.item(row, 1).text()
+        print(text)
+        text_splited = text.split('\n')
+        print("text_splited : {}".format(text_splited))
+        id_movie = AnalyzeData().catch_data_back(text_splited[0], "Num. ")
+        name_movie = AnalyzeData().catch_data_back(text_splited[1], "Movie : ")
+        print("id_movie : {}".format(id_movie))
+        print("name_movie : {}".format(name_movie))
+        #取出tableWidget_NP的資訊
+
+        if col == 0 :
+            #更新label_intro
+            result= action_list["QueryMovie"](client).execute(str(id_movie[0]))
+            print("result : {}".format(result))
+
+            list_movie = result["parameters"]
+            dict_movie = list_movie[0]
+            text_show_movie_info = "Num. {}".format(dict_movie["id"])
+            text_show_movie_info += "\nMovie : {}".format(dict_movie["movieName"])
+            text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
+            text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
+            text_show_movie_info += "\nOverview : {}".format(dict_movie["overview"])
+
+            widgets.label_intro.setText(text_show_movie_info)
+            #更新label_intro
+
+            self.update_tableWidget_NP(name_movie[0], int(id_movie[0]))
+
+
+            
+
 
         
 if __name__ == "__main__":

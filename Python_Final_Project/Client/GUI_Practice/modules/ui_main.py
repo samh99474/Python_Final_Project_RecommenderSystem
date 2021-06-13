@@ -1202,7 +1202,7 @@ class Ui_MainWindow(object):
         #新增label_video
 
         #新增label_status
-
+        """
         #設定scrollArea_status
         self.scrollArea_status = QScrollArea(self.row_NP)
         self.scrollArea_status.setObjectName(u"scrollArea_status")
@@ -1228,7 +1228,7 @@ class Ui_MainWindow(object):
                                                 "}\n"
                                                 )
         #設定scrollArea_NP
-
+        
         #設定scrollArea_WidgetContents_status
         self.scrollArea_WidgetContents_status = QWidget()
         self.scrollArea_WidgetContents_status.setObjectName(u"scrollArea_WidgetContents_status")
@@ -1256,6 +1256,7 @@ class Ui_MainWindow(object):
         self.scrollArea_status.setWidget(self.scrollArea_WidgetContents_status)
 
         self.gridLayout_NP.addWidget(self.scrollArea_status, 2, 0, 1, 2)
+        """
         #新增label_status
 
         #新增label_intro
@@ -1285,11 +1286,11 @@ class Ui_MainWindow(object):
         self.scrollArea_WidgetContents_intro.setObjectName(u"scrollArea_WidgetContents_intro")
         self.scrollArea_WidgetContents_intro.setGeometry(QRect(0, 0, 218, 218))
         self.scrollArea_WidgetContents_intro.setStyleSheet(u" QScrollBar:vertical {\n"
-                                                                "	border: none;\n"
-                                                                "    background: rgb(0, 0, 0);\n"
-                                                                "    width: 14px;\n"
-                                                                "    margin: 21px 0 21px 0;\n"
-                                                                "	border-radius: 0px;\n"
+                                                                "border: none;\n"
+                                                                "background: rgb(0, 0, 0);\n"
+                                                                "width: 14px;\n"
+                                                                "margin: 21px 0 21px 0;\n"
+                                                                "border-radius: 0px;\n"
                                                                 " }")
         #原本顏色為background: rgb(52, 59, 72)
         #設定scrollArea_WidgetContents_intro
@@ -1305,15 +1306,15 @@ class Ui_MainWindow(object):
         font_label.setItalic(False)
 
         self.label_intro = QLabel(self.scrollArea_WidgetContents_intro)
+        self.label_intro.setFont(font_label)  #字體大小無法改
         self.label_intro.setObjectName(u"label_video")
         #self.label_intro.setAlignment(Qt.AlignCenter)
-        self.label_intro.setText(QCoreApplication.translate("MainWindow", u"SHOW INTRODUCTION", None))
-        self.label_intro.setMinimumSize(QSize(700, 200))
-        self.label_intro.setFont(QFont().setPointSize(100))  #字體大小無法改
+        #self.label_intro.setText(QCoreApplication.translate("MainWindow", u"SHOW INTRODUCTION", None))
+        self.label_intro.setMinimumSize(QSize(700, 100))
         self.horizontalLayout_intro.addWidget(self.label_intro)
 
         self.scrollArea_intro.setWidget(self.scrollArea_WidgetContents_intro)
-        self.gridLayout_NP.addWidget(self.scrollArea_intro, 3, 0, 1, 2)
+        self.gridLayout_NP.addWidget(self.scrollArea_intro, 2, 0, 2, 2)
         #新增label_intro
 
         #新增tableWidget_NP

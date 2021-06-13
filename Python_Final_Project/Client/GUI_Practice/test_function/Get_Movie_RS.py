@@ -3,7 +3,7 @@ class Get_Movie_RS():
     def __init__(self, socket_client):
         self.socket_client = socket_client
 
-    def execute(self):
+    def execute(self, movieTitle = None, id = None):
         try:
             query_user_list = list()
             RS_dict = dict()
@@ -24,12 +24,14 @@ class Get_Movie_RS():
 
             print("輸入電影Name")
             #movieTitle = str(input("  Please input a movies's Name: "))
-            movieTitle = "Toy Story"
+            if movieTitle == None :
+                movieTitle = "Toy Story"
             RS_dict["movieTitle"] = movieTitle
 
             print("輸入電影ID")
             #id = int(input("  Please input a movies's ID: "))
-            id = 862
+            if id == None :
+                id = 862
             RS_dict["id"] = id
 
             print("輸入欲得到之推薦數量:")

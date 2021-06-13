@@ -1038,7 +1038,7 @@ class Ui_MainWindow(object):
 
         #設定row的數目
         #print("self.tableWidget_home.rowCount() : {}".format(self.tableWidget_home.rowCount()))
-        amount_row = 20
+        amount_row = 10
         if (self.tableWidget_home.rowCount() < amount_row):
             self.tableWidget_home.setRowCount(amount_row)
         #設定row的數目
@@ -1059,12 +1059,15 @@ class Ui_MainWindow(object):
                 item_intro.setFont(font_table)
                 self.tableWidget_home.setItem(i, 1, item_intro)
 
-                item_play = QTableWidgetItem(QIcon("./images/icons/cil-media-play.png")," ")  #要先設置item，在放進去table
+                item_play = QTableWidgetItem(QIcon(":/icons/images/icons/cil-media-play.png")," ")  #要先設置item，在放進去table
                 item_play.setText("Play")
                 item_play.setFont(font_table)
                 self.tableWidget_home.setItem(i, 0, item_play)
+
+
         #設置tableWidget_home的item
 
+        
 
 
         """
@@ -1141,7 +1144,7 @@ class Ui_MainWindow(object):
         self.tableWidget_home.setSortingEnabled(False)
         self.tableWidget_home.horizontalHeader().setVisible(False)
         self.tableWidget_home.horizontalHeader().setCascadingSectionResizes(True)
-        self.tableWidget_home.horizontalHeader().setDefaultSectionSize(100)  #設定第一個col的寬度
+        self.tableWidget_home.horizontalHeader().setDefaultSectionSize(150)  #設定第一個col的寬度
         self.tableWidget_home.horizontalHeader().setStretchLastSection(True)
         self.tableWidget_home.verticalHeader().setVisible(False)
         self.tableWidget_home.verticalHeader().setCascadingSectionResizes(False)
@@ -1328,7 +1331,7 @@ class Ui_MainWindow(object):
                 item_intro.setFont(font_table)
                 self.tableWidget_NP.setItem(i, 1, item_intro)
 
-                item_play = QTableWidgetItem(QIcon("./images/icons/cil-media-play.png")," ")  #要先設置item，在放進去table
+                item_play = QTableWidgetItem(QIcon(":/icons/images/icons/cil-media-play.png")," ")  #要先設置item，在放進去table
                 item_play.setText("Play")
                 item_play.setFont(font_table)
                 self.tableWidget_NP.setItem(i, 0, item_play)

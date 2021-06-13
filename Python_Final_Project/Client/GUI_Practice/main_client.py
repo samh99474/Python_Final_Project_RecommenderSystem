@@ -1,8 +1,8 @@
 from SocketClient.Socket_Client import SocketClient
-from AddUser import AddUser
-from Get_Movie_RS import Get_Movie_RS
-from Rating import Rating
-from QueryMovie import QueryMovie
+from test_function.AddUser import AddUser
+from test_function.Get_Movie_RS import Get_Movie_RS
+from test_function.Rating import Rating
+from test_function.QueryMovie import QueryMovie
 
 action_list = {
     "add": AddUser,

@@ -23,6 +23,22 @@ from modules import *
 from widgets import *
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
 
+
+from SocketClient.Socket_Client import SocketClient
+from test_function.AddUser import AddUser
+from test_function.Get_Movie_RS import Get_Movie_RS
+from test_function.Rating import Rating
+from test_function.QueryMovie import QueryMovie
+from test_function.AnalyzeData import AnalyzeData
+
+action_list = {
+    "add": AddUser,
+    "RS" : Get_Movie_RS,
+    "rating": Rating,
+    "QueryMovie": QueryMovie
+}
+
+
 # SET AS GLOBAL WIDGETS
 widgets = None
 
@@ -60,7 +76,7 @@ class MainWindow(QMainWindow):
         widgets.btn_new.clicked.connect(self.buttonClick)
         widgets.btn_save.clicked.connect(self.buttonClick)
         widgets.btn_exit.clicked.connect(self.buttonClick)
-        widgets.tableWidget_home.cellClicked.connect(self.test)
+        widgets.tableWidget_home.cellClicked.connect(self.click_tableWidget_home)
         """
         item_test = QTableWidgetItem()  #要先設置item，在放進去table
         item_test.setText("123")
@@ -91,6 +107,31 @@ class MainWindow(QMainWindow):
         # SET HOME PAGE AND SELECT MENU
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
+        client = SocketClient()
+        result = action_list["RS"](client).execute()
+        print("result : {}".format(result))
+        #home的初始化畫面
+        #parameters
+        #title
+        #vote_average
+        #genres
+        result_REC = result["parameters"]
+        print(len(result))
+        for i in range(len(result_REC)) :
+            dict_movie = result_REC[i]
+            """
+            print("\nMovie {}".format(i))
+            print("Movie : {}".format(dict_movie["title"]))
+            print("Vote average : {}".format(dict_movie["vote_average"]))
+            print("Genres : {}".format(dict_movie["genres"]))
+            """
+            #text_show_movie_info = "Movie {}".format(i)
+            text_show_movie_info = "Movie : {}".format(dict_movie["title"])
+            text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
+            text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
+            print(text_show_movie_info)
+            widgets.tableWidget_home.item(i, 1).setText(text_show_movie_info)
+        #home的初始化畫面
 
 
     # BUTTONS CLICK 
@@ -140,7 +181,7 @@ class MainWindow(QMainWindow):
             print('Mouse click: RIGHT CLICK')
 
     #增加新功能
-    def test(self, row, col):
+    def click_tableWidget_home(self, row, col):
         #print("cool~")
         #cellContent = item
         #print(row) # test 
@@ -156,13 +197,17 @@ class MainWindow(QMainWindow):
         text = widgets.tableWidget_home.item(row, 1).text()
         
         print(text)
+        text_splited = text.split('\n')
+        print("text_splited : {}".format(text_splited))
         #widgets.tableWidget_home.item(row, col).setText("456")
-
-        #切換頁面
-        widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
-        UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
-        widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
-        #切換頁面
+        #點按鈕才跳畫面
+        if col == 0 :
+            #切換頁面
+            widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
+            UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
+            widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
+            #切換頁面
+        #點按鈕才跳畫面
         
 if __name__ == "__main__":
     app = QApplication(sys.argv)

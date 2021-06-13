@@ -9,34 +9,40 @@ class Get_Movie_RS():
             RS_dict = dict()
 
             print("輸入用戶姓名")
-            userName = str(input("  Please input a user's name: "))
+            #userName = str(input("  Please input a user's name: "))
+            userName = "sam"
             RS_dict["userName"] = userName
 
             query_user_list.append(RS_dict)
 
             print("輸入用戶ID")
-            userId = str(input("  Please input a user's ID: "))
+            #userId = str(input("  Please input a user's ID: "))
             query_user_dict = dict()
+            userId = "672"
             query_user_dict["userId"] = userId
             RS_dict["userId"] = userId
 
             print("輸入電影Name")
-            movieTitle = str(input("  Please input a movies's Name: "))
+            #movieTitle = str(input("  Please input a movies's Name: "))
+            movieTitle = "Toy Story"
             RS_dict["movieTitle"] = movieTitle
 
             print("輸入電影ID")
-            id = int(input("  Please input a movies's ID: "))
+            #id = int(input("  Please input a movies's ID: "))
+            id = 862
             RS_dict["id"] = id
 
             print("輸入欲得到之推薦數量:")
-            Recommed_Top_Num = int(input("  Please input a Recommed_Top_Num: "))
+            #Recommed_Top_Num = int(input("  Please input a Recommed_Top_Num: "))
+            Recommed_Top_Num = 10
             RS_dict["Recommed_Top_Num"] = Recommed_Top_Num
 
             RS_list_info = list()
             RS_list_info.append(RS_dict)
 
             print("輸入欲使用之推薦方法: \n方法一、contentBased \n 方法二、hybrid")
-            RS_method = str(input("  Please input contentBased or hybrid : "))
+            #RS_method = str(input("  Please input contentBased or hybrid : "))
+            RS_method = "hybrid"
             RS_dict["RS_method"] = RS_method
 
             RS_list_info = list()
@@ -59,6 +65,7 @@ class Get_Movie_RS():
         except Exception as e:      #若try有錯誤，則執行except
             print("The exception {} occurs.".format(e))
             success = False
+
         finally:                    #不管try有沒有錯誤，最後一定會執行final
             if(success == True):
                 #=========================== socket_client 傳送指令和資料給server==================
@@ -77,4 +84,6 @@ class Get_Movie_RS():
             else:
                 print("推薦電影失敗")
             print("Execution result is {}".format(success))
-            return query_user_dict
+            
+            #return query_user_dict
+            return result

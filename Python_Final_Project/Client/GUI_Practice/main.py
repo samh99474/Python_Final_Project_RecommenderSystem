@@ -60,6 +60,12 @@ class MainWindow(QMainWindow):
         widgets.btn_new.clicked.connect(self.buttonClick)
         widgets.btn_save.clicked.connect(self.buttonClick)
         widgets.btn_exit.clicked.connect(self.buttonClick)
+        widgets.tableWidget_home.cellClicked.connect(self.test)
+        """
+        item_test = QTableWidgetItem()  #要先設置item，在放進去table
+        item_test.setText("123")
+        widgets.tableWidget_home.setItem(0, 0, item_test)
+        """
 
 
         # EXTRA RIGHT BOX
@@ -87,7 +93,8 @@ class MainWindow(QMainWindow):
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
 
 
-    # BUTTONS CLICK
+    # BUTTONS CLICK 
+
     # Post here your functions for clicked buttons
     def buttonClick(self):
         # GET BUTTON CLICKED
@@ -132,6 +139,31 @@ class MainWindow(QMainWindow):
         if event.buttons() == Qt.RightButton:
             print('Mouse click: RIGHT CLICK')
 
+    #增加新功能
+    def test(self, row, col):
+        #print("cool~")
+        #cellContent = item
+        #print(row) # test 
+        sf = "You clicked on [{},{}]".format(row,col) 
+        print(sf) 
+        
+        """
+        item_test = QTableWidgetItem()  #要先設置item，在放進去table
+        item_test.setText("123")
+        widgets.tableWidget_home.setItem(row, col, item_test)
+        """
+        
+        text = widgets.tableWidget_home.item(row, 1).text()
+        
+        print(text)
+        #widgets.tableWidget_home.item(row, col).setText("456")
+
+        #切換頁面
+        widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
+        UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
+        widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
+        #切換頁面
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("icon.ico"))

@@ -1031,84 +1031,56 @@ class Ui_MainWindow(object):
         #tableWidget_home
         self.tableWidget_home = QTableWidget(self.row_home)  #表格
         #設定col的數目
-        if (self.tableWidget_home.columnCount() < 2):
-            self.tableWidget_home.setColumnCount(2)
+        amount_col = 2
+        if (self.tableWidget_home.columnCount() < amount_col):
+            self.tableWidget_home.setColumnCount(amount_col)
         #設定col的數目
-
-        """
-        __qtablewidgetitem = QTableWidgetItem()
-        self.tableWidget_home.setHorizontalHeaderItem(0, __qtablewidgetitem)
-        __qtablewidgetitem1 = QTableWidgetItem()
-        self.tableWidget_home.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-        __qtablewidgetitem2 = QTableWidgetItem()
-        self.tableWidget_home.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        __qtablewidgetitem3 = QTableWidgetItem()
-        self.tableWidget_home.setHorizontalHeaderItem(3, __qtablewidgetitem3)
-        """
 
         #設定row的數目
         #print("self.tableWidget_home.rowCount() : {}".format(self.tableWidget_home.rowCount()))
-        if (self.tableWidget_home.rowCount() < 20):
-            self.tableWidget_home.setRowCount(20)
+        amount_row = 20
+        if (self.tableWidget_home.rowCount() < amount_row):
+            self.tableWidget_home.setRowCount(amount_row)
         #設定row的數目
 
-        """
-        font_test = QFont()
-        font_test.setFamily(u"Segoe UI")
-        
-        __qtablewidgetitem4 = QTableWidgetItem()
-        __qtablewidgetitem4.setFont(font_test);
-        self.tableWidget_home.setVerticalHeaderItem(0, __qtablewidgetitem4)
-        __qtablewidgetitem5 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(1, __qtablewidgetitem5)
-        __qtablewidgetitem6 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(2, __qtablewidgetitem6)
-        __qtablewidgetitem7 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(3, __qtablewidgetitem7)
-        __qtablewidgetitem8 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(4, __qtablewidgetitem8)
-        __qtablewidgetitem9 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(5, __qtablewidgetitem9)
-        __qtablewidgetitem10 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(6, __qtablewidgetitem10)
-        __qtablewidgetitem11 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(7, __qtablewidgetitem11)
-        __qtablewidgetitem12 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(8, __qtablewidgetitem12)
-        __qtablewidgetitem13 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(9, __qtablewidgetitem13)
-        __qtablewidgetitem14 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(10, __qtablewidgetitem14)
-        __qtablewidgetitem15 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(11, __qtablewidgetitem15)
-        __qtablewidgetitem16 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(12, __qtablewidgetitem16)
-        __qtablewidgetitem17 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(13, __qtablewidgetitem17)
-        __qtablewidgetitem18 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(14, __qtablewidgetitem18)
-        
-        __qtablewidgetitem19 = QTableWidgetItem()
-        self.tableWidget_home.setVerticalHeaderItem(15, __qtablewidgetitem19)
+
+        font_table = QFont()
+        font_table.setFamily(u"Segoe UI")
+        font_table.setPointSize(15)
+        font_table.setBold(False)
+        font_table.setItalic(False)
+
+        #宣告一個item放進去table裡面
+
+        #設置tableWidget_home的item
+        for i in range(amount_row):
+                item_intro = QTableWidgetItem()  #要先設置item，在放進去table
+                item_intro.setText("")
+                item_intro.setFont(font_table)
+                self.tableWidget_home.setItem(i, 1, item_intro)
+
+                item_play = QTableWidgetItem(QIcon("./images/icons/cil-media-play.png")," ")  #要先設置item，在放進去table
+                item_play.setText("Play")
+                item_play.setFont(font_table)
+                self.tableWidget_home.setItem(i, 0, item_play)
+        #設置tableWidget_home的item
 
 
-        __qtablewidgetitem20 = QTableWidgetItem()
-        self.tableWidget_home.setItem(0, 0, __qtablewidgetitem20)
-        __qtablewidgetitem21 = QTableWidgetItem()
-        self.tableWidget_home.setItem(0, 1, __qtablewidgetitem21)
-        __qtablewidgetitem22 = QTableWidgetItem()
-        self.tableWidget_home.setItem(0, 2, __qtablewidgetitem22)
-        __qtablewidgetitem23 = QTableWidgetItem()
-        self.tableWidget_home.setItem(0, 3, __qtablewidgetitem23)
-        self.tableWidget_home.setObjectName(u"tableWidget_home")
-        sizePolicy_test = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy_test.setHorizontalStretch(0)
-        sizePolicy_test.setVerticalStretch(0)
-        sizePolicy_test.setHeightForWidth(self.tableWidget_home.sizePolicy().hasHeightForWidth())
-        self.tableWidget_home.setSizePolicy(sizePolicy_test)
+
         """
+        photo_2 = QLabel()
+        photo_2.resize(800,800)
+        photo_2.setPixmap(QPixmap(":/icons/images/icons/cil-account-logout.png"))
+        self.tableWidget_home.setCellWidget(1, 0, photo_2)
+
+        btn_play = QPushButton()
+        btn_play.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-account-logout.png);")
+        self.tableWidget_home.setCellWidget(2, 0, btn_play)
+        """
+        
 
         #設定顏色
+        
         palette_home = QPalette()  #調色盤
         #QColor(R, G, B, lightness)  //lightness : 數字愈大愈亮
         #QBrush  //設定筆刷
@@ -1173,13 +1145,15 @@ class Ui_MainWindow(object):
         self.tableWidget_home.horizontalHeader().setStretchLastSection(True)
         self.tableWidget_home.verticalHeader().setVisible(False)
         self.tableWidget_home.verticalHeader().setCascadingSectionResizes(False)
-        self.tableWidget_home.verticalHeader().setDefaultSectionSize(100)  #設定每個row的寬度
+        self.tableWidget_home.verticalHeader().setDefaultSectionSize(150)  #設定每個row的寬度
         self.tableWidget_home.verticalHeader().setHighlightSections(False)
         self.tableWidget_home.verticalHeader().setStretchLastSection(True)
+
         #設定tableWidget_home
         
         self.horizontalLayout_home.addWidget(self.tableWidget_home)
         #tableWidget_home
+        
         
 
         self.verticalLayout_home.addWidget(self.row_home)
@@ -1345,6 +1319,20 @@ class Ui_MainWindow(object):
         if (self.tableWidget_NP.rowCount() < 20):
             self.tableWidget_NP.setRowCount(20)
         #設定row的數目
+
+
+        #設置tableWidget_home的item
+        for i in range(amount_row):
+                item_intro = QTableWidgetItem()  #要先設置item，在放進去table
+                item_intro.setText("")
+                item_intro.setFont(font_table)
+                self.tableWidget_NP.setItem(i, 1, item_intro)
+
+                item_play = QTableWidgetItem(QIcon("./images/icons/cil-media-play.png")," ")  #要先設置item，在放進去table
+                item_play.setText("Play")
+                item_play.setFont(font_table)
+                self.tableWidget_NP.setItem(i, 0, item_play)
+        #設置tableWidget_home的item
 
         #設定顏色
         palette_NP = QPalette()  #調色盤

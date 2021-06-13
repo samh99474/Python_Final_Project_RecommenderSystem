@@ -126,7 +126,8 @@ class MainWindow(QMainWindow):
             print("Genres : {}".format(dict_movie["genres"]))
             """
             #text_show_movie_info = "Movie {}".format(i)
-            text_show_movie_info = "Movie : {}".format(dict_movie["title"])
+            text_show_movie_info = "Num. {}".format(dict_movie["id"])
+            text_show_movie_info += "\nMovie : {}".format(dict_movie["title"])
             text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
             text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
             print(text_show_movie_info)
@@ -199,7 +200,11 @@ class MainWindow(QMainWindow):
         print(text)
         text_splited = text.split('\n')
         print("text_splited : {}".format(text_splited))
+        id_movie = AnalyzeData().catch_data_back(text_splited[0], "Num. ")
+        print("id_movie : {}".format(id_movie))
+
         #widgets.tableWidget_home.item(row, col).setText("456")
+        client = SocketClient()
         #點按鈕才跳畫面
         if col == 0 :
             #切換頁面
@@ -207,7 +212,78 @@ class MainWindow(QMainWindow):
             UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
             widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
             #切換頁面
+
+            #new_page的初始化畫面
+            result= action_list["QueryMovie"](client).execute(str(id_movie[0]))
+            print("result : {}".format(result))
+
+            list_movie = result["parameters"]
+            dict_movie = list_movie[0]
+            text_show_movie_info = "Num. {}".format(dict_movie["id"])
+            text_show_movie_info += "\nMovie : {}".format(dict_movie["movieName"])
+            text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
+            text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
+            text_show_movie_info += "\nOverview : {}".format(dict_movie["overview"])
+
+            widgets.label_intro.setText(text_show_movie_info)
+
+
+
+
+            """
+            result_QM = result["parameters"]
+            print(len(result))
+            for i in range(len(result_QM)) :
+                dict_movie = result_QM[i]
+           
+
+                print("\nMovie {}".format(i))
+                print("Movie : {}".format(dict_movie["title"]))
+                print("Vote average : {}".format(dict_movie["vote_average"]))
+                print("Genres : {}".format(dict_movie["genres"]))
+               
+                #text_show_movie_info = "Movie {}".format(i)
+                text_show_movie_info = "Num. {}".format(dict_movie["id"])
+                text_show_movie_info += "\nMovie : {}".format(dict_movie["title"])
+                text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
+                text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
+                print(text_show_movie_info)
+                widgets.tableWidget_home.item(i, 1).setText(text_show_movie_info)
+                
+            new_page的初始化畫面
+            """
+            self.update_tableWidget_NP()
+
         #點按鈕才跳畫面
+
+    def update_tableWidget_NP(self):
+        client = SocketClient()
+        result = action_list["RS"](client).execute()
+        print("result : {}".format(result))
+        #tableWidget_NP的初始化畫面
+        #parameters
+        #title
+        #vote_average
+        #genres
+        result_REC = result["parameters"]
+        print(len(result))
+        for i in range(len(result_REC)) :
+            dict_movie = result_REC[i]
+            """
+            print("\nMovie {}".format(i))
+            print("Movie : {}".format(dict_movie["title"]))
+            print("Vote average : {}".format(dict_movie["vote_average"]))
+            print("Genres : {}".format(dict_movie["genres"]))
+            """
+            #text_show_movie_info = "Movie {}".format(i)
+            text_show_movie_info = "Num. {}".format(dict_movie["id"])
+            text_show_movie_info += "\nMovie : {}".format(dict_movie["title"])
+            text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
+            text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
+            print(text_show_movie_info)
+            widgets.tableWidget_NP.item(i, 1).setText(text_show_movie_info)
+        #tableWidget_NP的初始化畫面
+
         
 if __name__ == "__main__":
     app = QApplication(sys.argv)

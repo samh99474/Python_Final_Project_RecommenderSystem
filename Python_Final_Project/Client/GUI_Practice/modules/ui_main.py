@@ -1298,11 +1298,18 @@ class Ui_MainWindow(object):
         self.horizontalLayout_intro.setObjectName(u"horizontalLayout_intro")
 
 
+        font_label = QFont()
+        font_label.setFamily(u"Segoe UI")
+        font_label.setPointSize(100)
+        font_label.setBold(False)
+        font_label.setItalic(False)
+
         self.label_intro = QLabel(self.scrollArea_WidgetContents_intro)
         self.label_intro.setObjectName(u"label_video")
-        self.label_intro.setAlignment(Qt.AlignCenter)
+        #self.label_intro.setAlignment(Qt.AlignCenter)
         self.label_intro.setText(QCoreApplication.translate("MainWindow", u"SHOW INTRODUCTION", None))
         self.label_intro.setMinimumSize(QSize(700, 200))
+        self.label_intro.setFont(QFont().setPointSize(100))  #字體大小無法改
         self.horizontalLayout_intro.addWidget(self.label_intro)
 
         self.scrollArea_intro.setWidget(self.scrollArea_WidgetContents_intro)
@@ -1313,14 +1320,14 @@ class Ui_MainWindow(object):
         self.tableWidget_NP = QTableWidget(self.row_home)  #表格
 
         #設定col的數目
-        if (self.tableWidget_NP.columnCount() < 2):
-            self.tableWidget_NP.setColumnCount(2)
+        if (self.tableWidget_NP.columnCount() < amount_col):
+            self.tableWidget_NP.setColumnCount(amount_col)
         #設定col的數目
 
         #設定row的數目
         #print("self.tableWidget_NP.rowCount() : {}".format(self.tableWidget_NP.rowCount()))
-        if (self.tableWidget_NP.rowCount() < 20):
-            self.tableWidget_NP.setRowCount(20)
+        if (self.tableWidget_NP.rowCount() < amount_row):
+            self.tableWidget_NP.setRowCount(amount_row)
         #設定row的數目
 
 

@@ -1508,6 +1508,26 @@ class Ui_MainWindow(object):
         self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
         #verticalLayout_14
 
+        #stackedWidget_setting
+        self.stackedWidget_setting = QStackedWidget(self.topMenus)
+        self.stackedWidget_setting.setObjectName(u"stackedWidgetSetting")
+        #stackedWidget_setting
+
+        #btn_login
+        self.btn_login = QPushButton(self.topMenus)
+        self.btn_login.setObjectName(u"btn_login")
+        sizePolicy.setHeightForWidth(self.btn_login.sizePolicy().hasHeightForWidth())
+        self.btn_login.setSizePolicy(sizePolicy)
+        self.btn_login.setMinimumSize(QSize(0, 45))
+        self.btn_login.setFont(font)
+        self.btn_login.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_login.setLayoutDirection(Qt.LeftToRight)
+        self.btn_login.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-input.png);")
+        self.btn_login.setText(QCoreApplication.translate("MainWindow", u"Login", None))
+
+        self.stackedWidget_setting.addWidget(self.btn_login)
+        #btn_login
+
         #btn_logout
         self.btn_logout = QPushButton(self.topMenus)
         self.btn_logout.setObjectName(u"btn_logout")
@@ -1518,9 +1538,366 @@ class Ui_MainWindow(object):
         self.btn_logout.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_logout.setLayoutDirection(Qt.LeftToRight)
         self.btn_logout.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-account-logout.png);")
+        self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
 
-        self.verticalLayout_14.addWidget(self.btn_logout)
+        self.stackedWidget_setting.addWidget(self.btn_logout)
         #btn_logout
+
+        #login_page的GUI
+        self.login_page = QWidget()
+        self.login_page.setObjectName(u"login_page")
+
+        #一組
+        self.verticalLayout_login = QVBoxLayout(self.login_page)
+        self.verticalLayout_login.setObjectName(u"verticalLayout_login")
+
+        
+        #設定row_login
+        self.row_login = QFrame(self.login_page)
+        self.row_login.setObjectName(u"row_login")
+        #self.row_login.setMinimumSize(QSize(400, 150))
+        self.row_login.setFrameShape(QFrame.StyledPanel)
+        self.row_login.setFrameShadow(QFrame.Raised)
+        #設定row_login
+
+        #用垂直的排列
+        self.verticalLayout_login2 = QVBoxLayout(self.row_login)
+        self.verticalLayout_login2.setObjectName(u"verticalLayout_login2")
+        #用垂直的排列
+
+        #新增gridLayout_NP
+        self.gridLayout_login = QGridLayout()
+        self.gridLayout_login.setObjectName(u"gridLayout_login")
+        #新增gridLayout_NP
+        #一組
+
+
+        #login_page中的widgets
+        font_login = QFont()
+        font_login.setFamily(u"Segoe UI")
+        font_login.setPointSize(15)
+        font_login.setBold(False)
+        font_login.setItalic(False)
+
+        self.label_accout = QLabel(self.row_login)
+        self.label_accout.setObjectName(u"label_accout")
+        self.label_accout.setFont(font_login)
+        self.label_accout.setStyleSheet(u"")
+        self.label_accout.setText("Account")
+        self.gridLayout_login.addWidget(self.label_accout, 0, 0, 1, 2)
+
+        self.lineEdit_account = QLineEdit(self.row_login)
+        self.lineEdit_account.setObjectName(u"lineEdit_account")
+        self.lineEdit_account.setMinimumSize(QSize(0, 30))
+        self.lineEdit_account.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.lineEdit_account.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your accout", None))
+        self.gridLayout_login.addWidget(self.lineEdit_account, 1, 0, 1, 3)
+
+
+        self.label_password = QLabel(self.row_login)
+        self.label_password.setObjectName(u"label_password")
+        self.label_password.setFont(font_login)
+        self.label_password.setStyleSheet(u"")
+        self.label_password.setText("Password")
+        self.gridLayout_login.addWidget(self.label_password, 3, 0, 1, 2)
+
+        self.lineEdit_password = QLineEdit(self.row_login)
+        self.lineEdit_password.setObjectName(u"lineEdit_password")
+        self.lineEdit_password.setMinimumSize(QSize(0, 30))
+        self.lineEdit_password.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.lineEdit_password.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your password", None))
+        self.gridLayout_login.addWidget(self.lineEdit_password, 4, 0, 1, 3)
+
+
+        #btn_login_2
+        self.btn_login_2 = QPushButton(self.row_login)
+        self.btn_login_2.setObjectName(u"btn_login_2")
+        sizePolicy.setHeightForWidth(self.btn_login_2.sizePolicy().hasHeightForWidth())
+        self.btn_login_2.setSizePolicy(sizePolicy)
+        self.btn_login_2.setMinimumSize(QSize(0, 45))
+        self.btn_login_2.setFont(font_login)
+        self.btn_login_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_login_2.setLayoutDirection(Qt.LeftToRight)
+        #self.btn_login_2.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-input.png);")
+        self.btn_login_2.setText(QCoreApplication.translate("MainWindow", u"Login", None))
+        self.gridLayout_login.addWidget(self.btn_login_2, 5, 2, 1, 1)
+        #btn_login_2
+        #login_page中的widgets
+
+
+        #一組
+        #設定gridLayout_login的row和col的比例
+        
+        #設定各別row所占的比例
+        self.gridLayout_login.setRowStretch(0, 1)
+        self.gridLayout_login.setRowStretch(1, 1)
+        self.gridLayout_login.setRowStretch(2, 1)
+        self.gridLayout_login.setRowStretch(3, 1)
+        self.gridLayout_login.setRowStretch(4, 1)
+        #設定各別row所占的比例
+
+        #設定各別col所占的比例
+        self.gridLayout_login.setColumnStretch(0, 1)  
+        self.gridLayout_login.setColumnStretch(1, 1)
+        self.gridLayout_login.setColumnStretch(2, 1)
+        #設定各別col所占的比例
+        
+        #設定gridLayout_login的row和col的比例
+
+
+        self.verticalLayout_login2.addLayout(self.gridLayout_login)
+        self.verticalLayout_login.addWidget(self.row_login)
+        
+        #設定label
+
+        self.stackedWidget_setting.addWidget(self.login_page)
+        #一組
+
+        
+        #login_page的GUI
+
+
+        #announcement_page的GUI
+        self.announcement_page = QWidget()
+        self.announcement_page.setObjectName(u"announcement_page")
+
+
+        #一組
+        self.verticalLayout_sign_up = QVBoxLayout(self.announcement_page)
+        self.verticalLayout_sign_up.setObjectName(u"verticalLayout_sign_up")
+
+        
+        #設定row_sign_up
+        self.row_sign_up = QFrame(self.login_page)
+        self.row_sign_up.setObjectName(u"row_sign_up")
+        #self.row_sign_up.setMinimumSize(QSize(400, 150))
+        self.row_sign_up.setFrameShape(QFrame.StyledPanel)
+        self.row_sign_up.setFrameShadow(QFrame.Raised)
+        #設定row_sign_up
+
+        #用垂直的排列
+        self.verticalLayout_sign_up2 = QVBoxLayout(self.row_sign_up)
+        self.verticalLayout_sign_up2.setObjectName(u"verticalLayout_sign_up2")
+        #用垂直的排列
+
+        #新增gridLayout_NP
+        self.gridLayout_sign_up = QGridLayout()
+        self.gridLayout_sign_up.setObjectName(u"gridLayout_sign_up")
+        #新增gridLayout_NP
+        #一組
+
+        #announcement_page中的widgets
+
+        self.label_PA = QLabel(self.row_sign_up)
+        self.label_PA.setObjectName(u"label_PA")
+        self.label_PA.setFont(font_login)
+        self.label_PA.setStyleSheet(u"")
+        self.label_PA.setWordWrap(True)  #有時會自動換行，有時不會
+        self.label_PA.setText("Incorrect account or password.")
+        self.label_PA.setStyleSheet("color:rgb(196, 0, 0);"
+                                        "font-size:15px;") 
+        self.gridLayout_sign_up.addWidget(self.label_PA, 0, 0, 3, 3)
+
+
+        #btn_return
+        self.btn_return = QPushButton(self.row_sign_up)
+        self.btn_return.setObjectName(u"btn_return")
+        sizePolicy.setHeightForWidth(self.btn_return.sizePolicy().hasHeightForWidth())
+        self.btn_return.setSizePolicy(sizePolicy)
+        self.btn_return.setMinimumSize(QSize(0, 45))
+        self.btn_return.setFont(font_login)
+        self.btn_return.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_return.setLayoutDirection(Qt.LeftToRight)
+        self.btn_return.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-arrow-left.png);")
+        self.btn_return.setText(QCoreApplication.translate("MainWindow", u"Return", None))
+        self.gridLayout_sign_up.addWidget(self.btn_return, 3, 0, 1, 3)
+        #btn_return
+
+        #btn_sign_up
+        self.btn_sign_up = QPushButton(self.row_sign_up)
+        self.btn_sign_up.setObjectName(u"btn_sign_up")
+        sizePolicy.setHeightForWidth(self.btn_sign_up.sizePolicy().hasHeightForWidth())
+        self.btn_sign_up.setSizePolicy(sizePolicy)
+        self.btn_sign_up.setMinimumSize(QSize(0, 45))
+        self.btn_sign_up.setFont(font_login)
+        self.btn_sign_up.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_sign_up.setLayoutDirection(Qt.LeftToRight)
+        self.btn_sign_up.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-hand-point-up.png);")
+        self.btn_sign_up.setText(QCoreApplication.translate("MainWindow", u"Sign up", None))
+        self.gridLayout_sign_up.addWidget(self.btn_sign_up, 4, 0, 1, 3)
+        #btn_sing_up
+
+
+        #announcement_page中的widgets
+
+
+        #一組
+        #設定gridLayout_sign_up的row和col的比例
+        
+        #設定各別row所占的比例
+        self.gridLayout_sign_up.setRowStretch(0, 1)
+        self.gridLayout_sign_up.setRowStretch(1, 1)
+        self.gridLayout_sign_up.setRowStretch(2, 1)
+        self.gridLayout_sign_up.setRowStretch(3, 1)
+        self.gridLayout_sign_up.setRowStretch(4, 1)
+        #設定各別row所占的比例
+
+        #設定各別col所占的比例
+        self.gridLayout_sign_up.setColumnStretch(0, 1)  
+        self.gridLayout_sign_up.setColumnStretch(1, 1)
+        self.gridLayout_sign_up.setColumnStretch(2, 1)
+        #設定各別col所占的比例
+        
+        #設定gridLayout_sign_up的row和col的比例
+
+
+        self.verticalLayout_sign_up2.addLayout(self.gridLayout_sign_up)
+        self.verticalLayout_sign_up.addWidget(self.row_sign_up)
+        
+        #設定label
+
+        self.stackedWidget_setting.addWidget(self.announcement_page)
+        #一組
+
+        #announcement_page的GUI
+
+        #sign_up_page的GUI
+        self.sign_up_page = QWidget()
+        self.sign_up_page.setObjectName(u"sign_up_page")
+
+        #一組
+        self.verticalLayout_sign_up = QVBoxLayout(self.sign_up_page)
+        self.verticalLayout_sign_up.setObjectName(u"verticalLayout_sign_up")
+
+        
+        #設定row_sign_up
+        self.row_sign_up = QFrame(self.sign_up_page)
+        self.row_sign_up.setObjectName(u"row_sign_up")
+        #self.row_sign_up.setMinimumSize(QSize(400, 150))
+        self.row_sign_up.setFrameShape(QFrame.StyledPanel)
+        self.row_sign_up.setFrameShadow(QFrame.Raised)
+        #設定row_sign_up
+
+        #用垂直的排列
+        self.verticalLayout_sign_up2 = QVBoxLayout(self.row_sign_up)
+        self.verticalLayout_sign_up2.setObjectName(u"verticalLayout_sign_up2")
+        #用垂直的排列
+
+        #新增gridLayout_NP
+        self.gridLayout_sign_up = QGridLayout()
+        self.gridLayout_sign_up.setObjectName(u"gridLayout_sign_up")
+        #新增gridLayout_NP
+        #一組
+
+
+        #sign_up_page中的widgets
+        font_sign_up = QFont()
+        font_sign_up.setFamily(u"Segoe UI")
+        font_sign_up.setPointSize(15)
+        font_sign_up.setBold(False)
+        font_sign_up.setItalic(False)
+
+        self.label_accout2 = QLabel(self.row_sign_up)
+        self.label_accout2.setObjectName(u"label_accout2")
+        self.label_accout2.setFont(font_sign_up)
+        self.label_accout2.setStyleSheet(u"")
+        self.label_accout2.setText("Account")
+        self.gridLayout_sign_up.addWidget(self.label_accout2, 0, 0, 1, 2)
+
+        self.lineEdit_account2 = QLineEdit(self.row_sign_up)
+        self.lineEdit_account2.setObjectName(u"lineEdit_account2")
+        self.lineEdit_account2.setMinimumSize(QSize(0, 30))
+        self.lineEdit_account2.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.lineEdit_account2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your accout", None))
+        self.gridLayout_sign_up.addWidget(self.lineEdit_account2, 1, 0, 1, 3)
+
+
+        self.label_password2 = QLabel(self.row_sign_up)
+        self.label_password2.setObjectName(u"label_password2")
+        self.label_password2.setFont(font_sign_up)
+        self.label_password2.setStyleSheet(u"")
+        self.label_password2.setText("Password")
+        self.gridLayout_sign_up.addWidget(self.label_password2, 3, 0, 1, 2)
+
+        self.lineEdit_password2 = QLineEdit(self.row_sign_up)
+        self.lineEdit_password2.setObjectName(u"lineEdit_password2")
+        self.lineEdit_password2.setMinimumSize(QSize(0, 30))
+        self.lineEdit_password2.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.lineEdit_password2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your password", None))
+        self.gridLayout_sign_up.addWidget(self.lineEdit_password2, 4, 0, 1, 3)
+
+        self.label_password3 = QLabel(self.row_sign_up)
+        self.label_password3.setObjectName(u"label_password3")
+        self.label_password3.setFont(font_sign_up)
+        self.label_password3.setStyleSheet(u"")
+        self.label_password3.setText("Re-enter password")
+        self.gridLayout_sign_up.addWidget(self.label_password3, 6, 0, 1, 2)
+
+        self.lineEdit_password3 = QLineEdit(self.row_sign_up)
+        self.lineEdit_password3.setObjectName(u"lineEdit_password3")
+        self.lineEdit_password3.setMinimumSize(QSize(0, 30))
+        self.lineEdit_password3.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.lineEdit_password3.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your password again", None))
+        self.gridLayout_sign_up.addWidget(self.lineEdit_password3, 7, 0, 1, 3)
+
+
+        #btn_sign_up_2
+        self.btn_sign_up_2 = QPushButton(self.row_sign_up)
+        self.btn_sign_up_2.setObjectName(u"btn_sign_up_2")
+        sizePolicy.setHeightForWidth(self.btn_sign_up_2.sizePolicy().hasHeightForWidth())
+        self.btn_sign_up_2.setSizePolicy(sizePolicy)
+        self.btn_sign_up_2.setMinimumSize(QSize(0, 45))
+        self.btn_sign_up_2.setFont(font_sign_up)
+        self.btn_sign_up_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_sign_up_2.setLayoutDirection(Qt.LeftToRight)
+        #self.btn_sign_up_2.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-input.png);")
+        self.btn_sign_up_2.setText(QCoreApplication.translate("MainWindow", u"Sign up", None))
+        self.gridLayout_sign_up.addWidget(self.btn_sign_up_2, 8, 2, 1, 1)
+        #btn_sign_up_2
+        #sign_up_page中的widgets
+
+
+        #一組
+        #設定gridLayout_sign_up的row和col的比例
+        
+        #設定各別row所占的比例
+        self.gridLayout_sign_up.setRowStretch(0, 1)
+        self.gridLayout_sign_up.setRowStretch(1, 1)
+        self.gridLayout_sign_up.setRowStretch(2, 1)
+        self.gridLayout_sign_up.setRowStretch(3, 1)
+        self.gridLayout_sign_up.setRowStretch(4, 1)
+        self.gridLayout_sign_up.setRowStretch(5, 1)
+        self.gridLayout_sign_up.setRowStretch(6, 1)
+        self.gridLayout_sign_up.setRowStretch(7, 1)
+        self.gridLayout_sign_up.setRowStretch(8, 1)
+        #設定各別row所占的比例
+
+        #設定各別col所占的比例
+        self.gridLayout_sign_up.setColumnStretch(0, 1)  
+        self.gridLayout_sign_up.setColumnStretch(1, 1)
+        self.gridLayout_sign_up.setColumnStretch(2, 1)
+        #設定各別col所占的比例
+        
+        #設定gridLayout_sign_up的row和col的比例
+
+
+        self.verticalLayout_sign_up2.addLayout(self.gridLayout_sign_up)
+        self.verticalLayout_sign_up.addWidget(self.row_sign_up)
+        
+        #設定label
+
+        self.stackedWidget_setting.addWidget(self.sign_up_page)
+        #一組
+
+        
+        #sign_up_page的GUI
+
+
+
+
+
+        self.verticalLayout_14.addWidget(self.stackedWidget_setting)
+
 
         self.verticalLayout_13.addWidget(self.topMenus, 0, Qt.AlignTop)
 
@@ -1624,7 +2001,7 @@ class Ui_MainWindow(object):
         self.closeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close", None))
 #endif // QT_CONFIG(tooltip)
         self.closeAppBtn.setText("")
-        self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
+        
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Jeff", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
     # retranslateUi

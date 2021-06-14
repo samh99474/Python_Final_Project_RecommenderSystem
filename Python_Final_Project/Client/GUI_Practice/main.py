@@ -90,6 +90,15 @@ class MainWindow(QMainWindow):
             UIFunctions.toggleRightBox(self, True)
         widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
 
+        #Setting function
+        widgets.btn_login.clicked.connect(self.buttonClick_setting)
+        widgets.btn_logout.clicked.connect(self.buttonClick_setting)
+        widgets.btn_login_2.clicked.connect(self.buttonClick_setting)
+        widgets.btn_return.clicked.connect(self.buttonClick_setting)
+        widgets.btn_sign_up.clicked.connect(self.buttonClick_setting)
+        #Setting function
+
+
         # SHOW APP
         self.show()
 
@@ -108,32 +117,35 @@ class MainWindow(QMainWindow):
         # SET HOME PAGE AND SELECT MENU
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
-        client = SocketClient()
-        result = action_list["RS"](client).execute()
-        print("result : {}".format(result))
-        #home的初始化畫面
-        #parameters
-        #title
-        #vote_average
-        #genres
-        result_REC = result["parameters"]
-        print(len(result))
-        for i in range(len(result_REC)) :
-            dict_movie = result_REC[i]
-            """
-            print("\nMovie {}".format(i))
-            print("Movie : {}".format(dict_movie["title"]))
-            print("Vote average : {}".format(dict_movie["vote_average"]))
-            print("Genres : {}".format(dict_movie["genres"]))
-            """
-            #text_show_movie_info = "Movie {}".format(i)
-            text_show_movie_info = "Num. {}".format(dict_movie["id"])
-            text_show_movie_info += "\nMovie : {}".format(dict_movie["title"])
-            text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
-            text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
-            print(text_show_movie_info)
-            widgets.tableWidget_home.item(i, 1).setText(text_show_movie_info)
-        #home的初始化畫面
+
+        #先不要
+        # client = SocketClient()
+        # result = action_list["RS"](client).execute()
+        # print("result : {}".format(result))
+        # #home的初始化畫面
+        # #parameters
+        # #title
+        # #vote_average
+        # #genres
+        # result_REC = result["parameters"]
+        # print(len(result))
+        # for i in range(len(result_REC)) :
+        #     dict_movie = result_REC[i]
+        #     """
+        #     print("\nMovie {}".format(i))
+        #     print("Movie : {}".format(dict_movie["title"]))
+        #     print("Vote average : {}".format(dict_movie["vote_average"]))
+        #     print("Genres : {}".format(dict_movie["genres"]))
+        #     """
+        #     #text_show_movie_info = "Movie {}".format(i)
+        #     text_show_movie_info = "Num. {}".format(dict_movie["id"])
+        #     text_show_movie_info += "\nMovie : {}".format(dict_movie["title"])
+        #     text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
+        #     text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
+        #     print(text_show_movie_info)
+        #     widgets.tableWidget_home.item(i, 1).setText(text_show_movie_info)
+        # #home的初始化畫面
+        #先不要
 
 
     # BUTTONS CLICK 
@@ -319,6 +331,52 @@ class MainWindow(QMainWindow):
             #更新label_intro
 
             self.update_tableWidget_NP(name_movie[0], int(id_movie[0]))
+
+    def test(self):
+        print("HI")
+        widgets.stackedWidget_setting.setCurrentWidget(widgets.btn_login) # SET PAGE
+
+    def buttonClick_setting(self):
+        # GET BUTTON CLICKED
+        btn = self.sender()
+        btnName = btn.objectName()
+
+        #btn_login
+        if btnName == "btn_login":
+            widgets.stackedWidget_setting.setCurrentWidget(widgets.login_page)
+
+        #btn_login_2
+        if btnName == "btn_login_2":
+            text_accout = widgets.lineEdit_account.text()
+            text_password = widgets.lineEdit_password.text()
+            
+            if text_accout != "" :
+                print("text_accout : {}".format(text_accout))
+            if text_password != "" :    
+                print("text_password : {}".format(text_password))
+
+            result = "NO"
+            if result == "NO" :
+                widgets.stackedWidget_setting.setCurrentWidget(widgets.announcement_page)
+
+            else :
+                widgets.stackedWidget_setting.setCurrentWidget(widgets.btn_logout)
+
+        #btn_return
+        if btnName == "btn_return":
+            widgets.stackedWidget_setting.setCurrentWidget(widgets.login_page)
+
+        #btn_sign_up
+        if btnName == "btn_sign_up":
+            widgets.stackedWidget_setting.setCurrentWidget(widgets.sign_up_page)
+
+        #btn_logout
+        if btnName == "btn_logout":
+            widgets.stackedWidget_setting.setCurrentWidget(widgets.btn_login) # SET PAGE
+
+        # PRINT BTN NAME
+        print(f'Button "{btnName}" pressed!')
+
 
 
             

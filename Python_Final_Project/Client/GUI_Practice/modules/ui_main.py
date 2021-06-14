@@ -1458,7 +1458,7 @@ class Ui_MainWindow(object):
         self.extraRightBox = QFrame(self.content)
         self.extraRightBox.setObjectName(u"extraRightBox")
         self.extraRightBox.setMinimumSize(QSize(0, 0))
-        self.extraRightBox.setMaximumSize(QSize(0, 16777215))
+        self.extraRightBox.setMaximumSize(QSize(0, 16777215))  #(寬，長)
         self.extraRightBox.setFrameShape(QFrame.NoFrame)
         self.extraRightBox.setFrameShadow(QFrame.Raised)
         #extraRightBox
@@ -1579,6 +1579,7 @@ class Ui_MainWindow(object):
         font_login.setBold(False)
         font_login.setItalic(False)
 
+
         self.label_accout = QLabel(self.row_login)
         self.label_accout.setObjectName(u"label_accout")
         self.label_accout.setFont(font_login)
@@ -1634,6 +1635,7 @@ class Ui_MainWindow(object):
         self.gridLayout_login.setRowStretch(2, 1)
         self.gridLayout_login.setRowStretch(3, 1)
         self.gridLayout_login.setRowStretch(4, 1)
+        self.gridLayout_login.setRowStretch(5, 1)
         #設定各別row所占的比例
 
         #設定各別col所占的比例
@@ -1663,32 +1665,32 @@ class Ui_MainWindow(object):
 
 
         #一組
-        self.verticalLayout_sign_up = QVBoxLayout(self.announcement_page)
-        self.verticalLayout_sign_up.setObjectName(u"verticalLayout_sign_up")
+        self.verticalLayout_AP = QVBoxLayout(self.announcement_page)
+        self.verticalLayout_AP.setObjectName(u"verticalLayout_AP")
 
         
-        #設定row_sign_up
-        self.row_sign_up = QFrame(self.login_page)
-        self.row_sign_up.setObjectName(u"row_sign_up")
-        #self.row_sign_up.setMinimumSize(QSize(400, 150))
-        self.row_sign_up.setFrameShape(QFrame.StyledPanel)
-        self.row_sign_up.setFrameShadow(QFrame.Raised)
-        #設定row_sign_up
+        #設定row_AP
+        self.row_AP = QFrame(self.login_page)
+        self.row_AP.setObjectName(u"row_AP")
+        #self.row_AP.setMinimumSize(QSize(400, 150))
+        self.row_AP.setFrameShape(QFrame.StyledPanel)
+        self.row_AP.setFrameShadow(QFrame.Raised)
+        #設定row_AP
 
         #用垂直的排列
-        self.verticalLayout_sign_up2 = QVBoxLayout(self.row_sign_up)
-        self.verticalLayout_sign_up2.setObjectName(u"verticalLayout_sign_up2")
+        self.verticalLayout_AP2 = QVBoxLayout(self.row_AP)
+        self.verticalLayout_AP2.setObjectName(u"verticalLayout_AP2")
         #用垂直的排列
 
         #新增gridLayout_NP
-        self.gridLayout_sign_up = QGridLayout()
-        self.gridLayout_sign_up.setObjectName(u"gridLayout_sign_up")
+        self.gridLayout_AP = QGridLayout()
+        self.gridLayout_AP.setObjectName(u"gridLayout_AP")
         #新增gridLayout_NP
         #一組
 
         #announcement_page中的widgets
 
-        self.label_PA = QLabel(self.row_sign_up)
+        self.label_PA = QLabel(self.row_AP)
         self.label_PA.setObjectName(u"label_PA")
         self.label_PA.setFont(font_login)
         self.label_PA.setStyleSheet(u"")
@@ -1696,11 +1698,11 @@ class Ui_MainWindow(object):
         self.label_PA.setText("Incorrect account or password.")
         self.label_PA.setStyleSheet("color:rgb(196, 0, 0);"
                                         "font-size:15px;") 
-        self.gridLayout_sign_up.addWidget(self.label_PA, 0, 0, 3, 3)
+        self.gridLayout_AP.addWidget(self.label_PA, 0, 0, 3, 3)
 
 
         #btn_return
-        self.btn_return = QPushButton(self.row_sign_up)
+        self.btn_return = QPushButton(self.row_AP)
         self.btn_return.setObjectName(u"btn_return")
         sizePolicy.setHeightForWidth(self.btn_return.sizePolicy().hasHeightForWidth())
         self.btn_return.setSizePolicy(sizePolicy)
@@ -1710,11 +1712,11 @@ class Ui_MainWindow(object):
         self.btn_return.setLayoutDirection(Qt.LeftToRight)
         self.btn_return.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-arrow-left.png);")
         self.btn_return.setText(QCoreApplication.translate("MainWindow", u"Return", None))
-        self.gridLayout_sign_up.addWidget(self.btn_return, 3, 0, 1, 3)
+        self.gridLayout_AP.addWidget(self.btn_return, 3, 0, 1, 3)
         #btn_return
 
         #btn_sign_up
-        self.btn_sign_up = QPushButton(self.row_sign_up)
+        self.btn_sign_up = QPushButton(self.row_AP)
         self.btn_sign_up.setObjectName(u"btn_sign_up")
         sizePolicy.setHeightForWidth(self.btn_sign_up.sizePolicy().hasHeightForWidth())
         self.btn_sign_up.setSizePolicy(sizePolicy)
@@ -1724,7 +1726,7 @@ class Ui_MainWindow(object):
         self.btn_sign_up.setLayoutDirection(Qt.LeftToRight)
         self.btn_sign_up.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-hand-point-up.png);")
         self.btn_sign_up.setText(QCoreApplication.translate("MainWindow", u"Sign up", None))
-        self.gridLayout_sign_up.addWidget(self.btn_sign_up, 4, 0, 1, 3)
+        self.gridLayout_AP.addWidget(self.btn_sign_up, 4, 0, 1, 3)
         #btn_sing_up
 
 
@@ -1732,27 +1734,27 @@ class Ui_MainWindow(object):
 
 
         #一組
-        #設定gridLayout_sign_up的row和col的比例
+        #設定gridLayout_AP的row和col的比例
         
         #設定各別row所占的比例
-        self.gridLayout_sign_up.setRowStretch(0, 1)
-        self.gridLayout_sign_up.setRowStretch(1, 1)
-        self.gridLayout_sign_up.setRowStretch(2, 1)
-        self.gridLayout_sign_up.setRowStretch(3, 1)
-        self.gridLayout_sign_up.setRowStretch(4, 1)
+        self.gridLayout_AP.setRowStretch(0, 1)
+        self.gridLayout_AP.setRowStretch(1, 1)
+        self.gridLayout_AP.setRowStretch(2, 1)
+        self.gridLayout_AP.setRowStretch(3, 1)
+        self.gridLayout_AP.setRowStretch(4, 1)
         #設定各別row所占的比例
 
         #設定各別col所占的比例
-        self.gridLayout_sign_up.setColumnStretch(0, 1)  
-        self.gridLayout_sign_up.setColumnStretch(1, 1)
-        self.gridLayout_sign_up.setColumnStretch(2, 1)
+        self.gridLayout_AP.setColumnStretch(0, 1)  
+        self.gridLayout_AP.setColumnStretch(1, 1)
+        self.gridLayout_AP.setColumnStretch(2, 1)
         #設定各別col所占的比例
         
-        #設定gridLayout_sign_up的row和col的比例
+        #設定gridLayout_AP的row和col的比例
 
 
-        self.verticalLayout_sign_up2.addLayout(self.gridLayout_sign_up)
-        self.verticalLayout_sign_up.addWidget(self.row_sign_up)
+        self.verticalLayout_AP2.addLayout(self.gridLayout_AP)
+        self.verticalLayout_AP.addWidget(self.row_AP)
         
         #設定label
 
@@ -1797,19 +1799,28 @@ class Ui_MainWindow(object):
         font_sign_up.setBold(False)
         font_sign_up.setItalic(False)
 
+        self.label_PA_2 = QLabel(self.row_sign_up)
+        self.label_PA_2.setObjectName(u"label_PA_2")
+        self.label_PA_2.setFont(font_sign_up)
+        self.label_PA_2.setStyleSheet(u"")
+        self.label_PA_2.setText("")
+        self.label_PA_2.setStyleSheet("color:rgb(196, 0, 0);"
+                                "font-size:15px;") 
+        self.gridLayout_sign_up.addWidget(self.label_PA_2, 0, 0, 1, 3)
+
         self.label_accout2 = QLabel(self.row_sign_up)
         self.label_accout2.setObjectName(u"label_accout2")
         self.label_accout2.setFont(font_sign_up)
         self.label_accout2.setStyleSheet(u"")
         self.label_accout2.setText("Account")
-        self.gridLayout_sign_up.addWidget(self.label_accout2, 0, 0, 1, 2)
+        self.gridLayout_sign_up.addWidget(self.label_accout2, 1, 0, 1, 2)
 
         self.lineEdit_account2 = QLineEdit(self.row_sign_up)
         self.lineEdit_account2.setObjectName(u"lineEdit_account2")
         self.lineEdit_account2.setMinimumSize(QSize(0, 30))
         self.lineEdit_account2.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.lineEdit_account2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your accout", None))
-        self.gridLayout_sign_up.addWidget(self.lineEdit_account2, 1, 0, 1, 3)
+        self.gridLayout_sign_up.addWidget(self.lineEdit_account2, 2, 0, 1, 3)
 
 
         self.label_password2 = QLabel(self.row_sign_up)
@@ -1817,28 +1828,28 @@ class Ui_MainWindow(object):
         self.label_password2.setFont(font_sign_up)
         self.label_password2.setStyleSheet(u"")
         self.label_password2.setText("Password")
-        self.gridLayout_sign_up.addWidget(self.label_password2, 3, 0, 1, 2)
+        self.gridLayout_sign_up.addWidget(self.label_password2, 4, 0, 1, 2)
 
         self.lineEdit_password2 = QLineEdit(self.row_sign_up)
         self.lineEdit_password2.setObjectName(u"lineEdit_password2")
         self.lineEdit_password2.setMinimumSize(QSize(0, 30))
         self.lineEdit_password2.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.lineEdit_password2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your password", None))
-        self.gridLayout_sign_up.addWidget(self.lineEdit_password2, 4, 0, 1, 3)
+        self.gridLayout_sign_up.addWidget(self.lineEdit_password2, 5, 0, 1, 3)
 
         self.label_password3 = QLabel(self.row_sign_up)
         self.label_password3.setObjectName(u"label_password3")
         self.label_password3.setFont(font_sign_up)
         self.label_password3.setStyleSheet(u"")
         self.label_password3.setText("Re-enter password")
-        self.gridLayout_sign_up.addWidget(self.label_password3, 6, 0, 1, 2)
+        self.gridLayout_sign_up.addWidget(self.label_password3, 7, 0, 1, 2)
 
         self.lineEdit_password3 = QLineEdit(self.row_sign_up)
         self.lineEdit_password3.setObjectName(u"lineEdit_password3")
         self.lineEdit_password3.setMinimumSize(QSize(0, 30))
         self.lineEdit_password3.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.lineEdit_password3.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your password again", None))
-        self.gridLayout_sign_up.addWidget(self.lineEdit_password3, 7, 0, 1, 3)
+        self.gridLayout_sign_up.addWidget(self.lineEdit_password3, 8, 0, 1, 3)
 
 
         #btn_sign_up_2
@@ -1852,7 +1863,7 @@ class Ui_MainWindow(object):
         self.btn_sign_up_2.setLayoutDirection(Qt.LeftToRight)
         #self.btn_sign_up_2.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-input.png);")
         self.btn_sign_up_2.setText(QCoreApplication.translate("MainWindow", u"Sign up", None))
-        self.gridLayout_sign_up.addWidget(self.btn_sign_up_2, 8, 2, 1, 1)
+        self.gridLayout_sign_up.addWidget(self.btn_sign_up_2, 9, 2, 1, 1)
         #btn_sign_up_2
         #sign_up_page中的widgets
 
@@ -1870,6 +1881,7 @@ class Ui_MainWindow(object):
         self.gridLayout_sign_up.setRowStretch(6, 1)
         self.gridLayout_sign_up.setRowStretch(7, 1)
         self.gridLayout_sign_up.setRowStretch(8, 1)
+        self.gridLayout_sign_up.setRowStretch(9, 1)
         #設定各別row所占的比例
 
         #設定各別col所占的比例

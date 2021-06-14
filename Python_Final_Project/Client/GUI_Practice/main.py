@@ -96,6 +96,7 @@ class MainWindow(QMainWindow):
         widgets.btn_login_2.clicked.connect(self.buttonClick_setting)
         widgets.btn_return.clicked.connect(self.buttonClick_setting)
         widgets.btn_sign_up.clicked.connect(self.buttonClick_setting)
+        widgets.btn_sign_up_2.clicked.connect(self.buttonClick_setting)
         #Setting function
 
 
@@ -355,8 +356,8 @@ class MainWindow(QMainWindow):
             if text_password != "" :    
                 print("text_password : {}".format(text_password))
 
-            result = "NO"
-            if result == "NO" :
+            result = "Fail"
+            if result == "Fail" :
                 widgets.stackedWidget_setting.setCurrentWidget(widgets.announcement_page)
 
             else :
@@ -369,6 +370,20 @@ class MainWindow(QMainWindow):
         #btn_sign_up
         if btnName == "btn_sign_up":
             widgets.stackedWidget_setting.setCurrentWidget(widgets.sign_up_page)
+
+        #btn_sign_upbtn_sign_up_2
+        if btnName == "btn_sign_up_2":
+            
+
+            result = "Fail"
+            if result == "Fail" :
+                widgets.label_PA_2.setText("The account already exists.")
+                widgets.lineEdit_account2.clear()
+                widgets.lineEdit_password2.clear()
+                widgets.lineEdit_password3.clear()
+                
+            else :
+                widgets.stackedWidget_setting.setCurrentWidget(widgets.login_page)
 
         #btn_logout
         if btnName == "btn_logout":

@@ -43,7 +43,6 @@ action_list = {
 
 # SET AS GLOBAL WIDGETS
 widgets = None
-
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -54,6 +53,9 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         global widgets
         widgets = self.ui
+
+        self.user_name = None
+        self.user_id = None
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = True
@@ -121,34 +123,34 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
 
-        #先不要
-        # client = SocketClient()
-        # result = action_list["RS"](client).execute()
-        # print("result : {}".format(result))
-        # #home的初始化畫面
-        # #parameters
-        # #title
-        # #vote_average
-        # #genres
-        # result_REC = result["parameters"]
-        # print(len(result))
-        # for i in range(len(result_REC)) :
-        #     dict_movie = result_REC[i]
-        #     """
-        #     print("\nMovie {}".format(i))
-        #     print("Movie : {}".format(dict_movie["title"]))
-        #     print("Vote average : {}".format(dict_movie["vote_average"]))
-        #     print("Genres : {}".format(dict_movie["genres"]))
-        #     """
-        #     #text_show_movie_info = "Movie {}".format(i)
-        #     text_show_movie_info = "Num. {}".format(dict_movie["id"])
-        #     text_show_movie_info += "\nMovie : {}".format(dict_movie["title"])
-        #     text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
-        #     text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
-        #     print(text_show_movie_info)
-        #     widgets.tableWidget_home.item(i, 1).setText(text_show_movie_info)
-        # #home的初始化畫面
-        #先不要
+        #先不要，會很慢
+        client = SocketClient()
+        result = action_list["RS"](client).execute()
+        print("result : {}".format(result))
+        #home的初始化畫面
+        #parameters
+        #title
+        #vote_average
+        #genres
+        result_REC = result["parameters"]
+        print(len(result))
+        for i in range(len(result_REC)) :
+            dict_movie = result_REC[i]
+            """
+            print("\nMovie {}".format(i))
+            print("Movie : {}".format(dict_movie["title"]))
+            print("Vote average : {}".format(dict_movie["vote_average"]))
+            print("Genres : {}".format(dict_movie["genres"]))
+            """
+            #text_show_movie_info = "Movie {}".format(i)
+            text_show_movie_info = "Num. {}".format(dict_movie["id"])
+            text_show_movie_info += "\nMovie : {}".format(dict_movie["title"])
+            text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
+            text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
+            print(text_show_movie_info)
+            widgets.tableWidget_home.item(i, 1).setText(text_show_movie_info)
+        #home的初始化畫面
+        #先不要，會很慢
 
 
     # BUTTONS CLICK 
@@ -268,13 +270,20 @@ class MainWindow(QMainWindow):
                 
             new_page的初始化畫面
             """
-            self.update_tableWidget_NP()
+            self.update_tableWidget_NP(name_movie = dict_movie["movieName"], id_movie = dict_movie["id"])
 
         #點按鈕才跳畫面
 
     def update_tableWidget_NP(self, name_movie = None, id_movie = None):
         client = SocketClient()
-        result = action_list["RS"](client).execute(name_movie, id_movie)
+        if self.user_name != None and self.user_id != None :
+            print("user_name : {}, user_id : {}".format(self.user_name, self.user_id))
+            result = action_list["RS"](client).execute(userName = self.user_name, userId = self.user_id, movieTitle = name_movie, id = int(id_movie))
+        
+        else :
+            print("user_name : {}, user_id : {}".format(self.user_name, self.user_id))
+            result = action_list["RS"](client).execute(movieTitle = name_movie, id = int(id_movie))
+
         print("result : {}".format(result))
         #tableWidget_NP的初始化畫面
         #parameters
@@ -362,8 +371,11 @@ class MainWindow(QMainWindow):
             else :
                 result = action_list["QU"](client).execute(text_accout)
                 
-
+            parameters = result["parameters"][0]
             if result["status"] == "OK" :
+                self.user_name = parameters["userName"]
+                self.user_id = parameters["userId"]
+                #print("user_name : {}, user_id : {}".format(self.user_name, self.user_id))
                 widgets.stackedWidget_setting.setCurrentWidget(widgets.btn_logout)
                 widgets.lineEdit_account.clear()
                 widgets.label_PA2.setText("")
@@ -413,6 +425,8 @@ class MainWindow(QMainWindow):
         #btn_logout
         if btnName == "btn_logout":
             widgets.stackedWidget_setting.setCurrentWidget(widgets.btn_login) # SET PAGE
+            self.user_name = None
+            self.user_id = None
 
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')

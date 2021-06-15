@@ -3,14 +3,14 @@ class Get_Movie_RS():
     def __init__(self, socket_client):
         self.socket_client = socket_client
 
-    def execute(self, movieTitle = None, id = None):
+    def execute(self, userName = None, userId = None, movieTitle = None, id = None):
         try:
             query_user_list = list()
             RS_dict = dict()
 
             print("輸入用戶姓名")
             #userName = str(input("  Please input a user's name: "))
-            userName = "sam"
+            #userName = "sam"
             RS_dict["userName"] = userName
 
             query_user_list.append(RS_dict)
@@ -18,7 +18,7 @@ class Get_Movie_RS():
             print("輸入用戶ID")
             #userId = str(input("  Please input a user's ID: "))
             query_user_dict = dict()
-            userId = "672"
+            #userId = "672"
             query_user_dict["userId"] = userId
             RS_dict["userId"] = userId
 
@@ -30,6 +30,7 @@ class Get_Movie_RS():
 
             print("輸入電影ID")
             #id = int(input("  Please input a movies's ID: "))
+            #id = int(id)  #確保一定是int
             if id == None :
                 id = 862
             RS_dict["id"] = id
@@ -44,26 +45,31 @@ class Get_Movie_RS():
 
             print("輸入欲使用之推薦方法: \n方法一、contentBased \n 方法二、hybrid")
             #RS_method = str(input("  Please input contentBased or hybrid : "))
-            RS_method = "hybrid"
+            if userName != None and userId != None :
+                RS_method = "hybrid"
+
+            else :
+                RS_method = "contentBased"
             RS_dict["RS_method"] = RS_method
 
             RS_list_info = list()
             RS_list_info.append(RS_dict)
 
             #先查詢query是否存在此學生名稱
-            self.socket_client.send_command("queryUser", query_user_list)
-            print("\nclient send data to server => \'command\':{}, \'parameters\':{}".format("query", query_user_list))
+            # self.socket_client.send_command("queryUser", query_user_list)
+            # print("\nclient send data to server => \'command\':{}, \'parameters\':{}".format("query", query_user_list))
 
-            boolean, result = self.socket_client.wait_response()
-            result = json.loads(result) # convert dictionary string to dictionary
+            # boolean, result = self.socket_client.wait_response()
+            # result = json.loads(result) # convert dictionary string to dictionary
 
-            if result['status'] == "Fail":
-                print("此用戶名稱不存在")
-                success = False
-            else:
-                print("此用戶名稱存在")
-                success = True
-        
+            # if result['status'] == "Fail":
+            #     print("此用戶名稱不存在")
+            #     success = False
+            # else:
+            #     print("此用戶名稱存在")
+            #     success = True
+            #先查詢query是否存在此學生名稱
+            success = True
         except Exception as e:      #若try有錯誤，則執行except
             print("The exception {} occurs.".format(e))
             success = False

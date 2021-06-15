@@ -1,11 +1,11 @@
 import json
-class AddUser():
+class QueryUser():
     def __init__(self, socket_client):
         self.socket_client = socket_client
 
     def execute(self, userName = None):
         try:
-            print("新增用戶姓名")
+            print("查詢用戶姓名")
             #userName = str(input("  Please input a user's name: "))
             has_item = False
             add_user_dict = dict()
@@ -34,24 +34,5 @@ class AddUser():
             print("The exception {} occurs.".format(e))
             success = False
         finally:                    #不管try有沒有錯誤，最後一定會執行final
-            if(success == True):
-                add_list_info = list()
-                add_list_info.append(add_user_dict)
-                #=========================== socket_client 傳送指令和資料給server==================
-                self.socket_client.send_command("addUser", add_list_info)
-                print("\nclient send data to server => \'command\':{}, \'parameters\':{}".format("add", add_list_info))
-
-                boolean, result = self.socket_client.wait_response()
-                result = json.loads(result) # convert dictionary string to dictionary
-
-                if result['status'] == "OK":
-                    print("    Add {} success".format(add_list_info))
-                    print("新增成功")
-                else:
-                    print("    Add {} fail".format(add_list_info))
-            
-            else:
-                print("新增失敗")
-            print("Execution result is {}".format(success))
-            #return query_user_dict
-            return success
+            print("result : {}".format(result))
+            return result

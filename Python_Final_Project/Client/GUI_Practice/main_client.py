@@ -3,12 +3,14 @@ from test_function.AddUser import AddUser
 from test_function.Get_Movie_RS import Get_Movie_RS
 from test_function.Rating import Rating
 from test_function.QueryMovie import QueryMovie
+from test_function.QueryUser import QueryUser
 
 action_list = {
     "add": AddUser,
     "RS" : Get_Movie_RS,
     "rating": Rating,
-    "QueryMovie": QueryMovie
+    "QueryMovie": QueryMovie,
+    "QU" : QueryUser
 }
 
 #======================================================================
@@ -18,6 +20,7 @@ def print_menu():
         print("RS: Get Movie Recommemdation")
         print("rating: rating a Movie")
         print("QueryMovie: Query a Movie")
+        print("QU : Query user")
         print("exit: Exit")
         selection = input("Please select: ")
 

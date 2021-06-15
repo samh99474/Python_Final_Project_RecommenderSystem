@@ -1580,19 +1580,26 @@ class Ui_MainWindow(object):
         font_login.setItalic(False)
 
 
+        self.label_PA2 = QLabel(self.row_login)
+        self.label_PA2.setObjectName(u"label_PA2")
+        self.label_PA2.setFont(font_login)
+        self.label_PA2.setStyleSheet(u"")
+        self.label_PA2.setText("")
+        self.gridLayout_login.addWidget(self.label_PA2, 0, 0, 1, 2)
+
         self.label_accout = QLabel(self.row_login)
         self.label_accout.setObjectName(u"label_accout")
         self.label_accout.setFont(font_login)
         self.label_accout.setStyleSheet(u"")
         self.label_accout.setText("Account")
-        self.gridLayout_login.addWidget(self.label_accout, 0, 0, 1, 2)
+        self.gridLayout_login.addWidget(self.label_accout, 1, 0, 1, 2)
 
         self.lineEdit_account = QLineEdit(self.row_login)
         self.lineEdit_account.setObjectName(u"lineEdit_account")
         self.lineEdit_account.setMinimumSize(QSize(0, 30))
         self.lineEdit_account.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.lineEdit_account.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your accout", None))
-        self.gridLayout_login.addWidget(self.lineEdit_account, 1, 0, 1, 3)
+        self.gridLayout_login.addWidget(self.lineEdit_account, 2, 0, 1, 3)
 
 
         self.label_password = QLabel(self.row_login)
@@ -1600,14 +1607,14 @@ class Ui_MainWindow(object):
         self.label_password.setFont(font_login)
         self.label_password.setStyleSheet(u"")
         self.label_password.setText("Password")
-        self.gridLayout_login.addWidget(self.label_password, 3, 0, 1, 2)
+        self.gridLayout_login.addWidget(self.label_password, 4, 0, 1, 2)
 
         self.lineEdit_password = QLineEdit(self.row_login)
         self.lineEdit_password.setObjectName(u"lineEdit_password")
         self.lineEdit_password.setMinimumSize(QSize(0, 30))
         self.lineEdit_password.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.lineEdit_password.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your password", None))
-        self.gridLayout_login.addWidget(self.lineEdit_password, 4, 0, 1, 3)
+        self.gridLayout_login.addWidget(self.lineEdit_password, 5, 0, 1, 3)
 
 
         #btn_login_2
@@ -1621,7 +1628,7 @@ class Ui_MainWindow(object):
         self.btn_login_2.setLayoutDirection(Qt.LeftToRight)
         #self.btn_login_2.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-input.png);")
         self.btn_login_2.setText(QCoreApplication.translate("MainWindow", u"Login", None))
-        self.gridLayout_login.addWidget(self.btn_login_2, 5, 2, 1, 1)
+        self.gridLayout_login.addWidget(self.btn_login_2, 6, 1, 1, 2)
         #btn_login_2
         #login_page中的widgets
 
@@ -1636,6 +1643,7 @@ class Ui_MainWindow(object):
         self.gridLayout_login.setRowStretch(3, 1)
         self.gridLayout_login.setRowStretch(4, 1)
         self.gridLayout_login.setRowStretch(5, 1)
+        self.gridLayout_login.setRowStretch(6, 1)
         #設定各別row所占的比例
 
         #設定各別col所占的比例
@@ -1863,7 +1871,7 @@ class Ui_MainWindow(object):
         self.btn_sign_up_2.setLayoutDirection(Qt.LeftToRight)
         #self.btn_sign_up_2.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-input.png);")
         self.btn_sign_up_2.setText(QCoreApplication.translate("MainWindow", u"Sign up", None))
-        self.gridLayout_sign_up.addWidget(self.btn_sign_up_2, 9, 2, 1, 1)
+        self.gridLayout_sign_up.addWidget(self.btn_sign_up_2, 9, 1, 1, 2)
         #btn_sign_up_2
         #sign_up_page中的widgets
 

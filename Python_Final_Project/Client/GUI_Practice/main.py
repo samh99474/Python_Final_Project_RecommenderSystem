@@ -29,13 +29,15 @@ from test_function.AddUser import AddUser
 from test_function.Get_Movie_RS import Get_Movie_RS
 from test_function.Rating import Rating
 from test_function.QueryMovie import QueryMovie
+from test_function.QueryUser import QueryUser
 from test_function.AnalyzeData import AnalyzeData
 
 action_list = {
     "add": AddUser,
     "RS" : Get_Movie_RS,
     "rating": Rating,
-    "QueryMovie": QueryMovie
+    "QueryMovie": QueryMovie,
+    "QU" : QueryUser
 }
 
 
@@ -341,6 +343,7 @@ class MainWindow(QMainWindow):
         # GET BUTTON CLICKED
         btn = self.sender()
         btnName = btn.objectName()
+        client = SocketClient()
 
         #btn_login
         if btnName == "btn_login":
@@ -351,39 +354,61 @@ class MainWindow(QMainWindow):
             text_accout = widgets.lineEdit_account.text()
             text_password = widgets.lineEdit_password.text()
             
-            if text_accout != "" :
-                print("text_accout : {}".format(text_accout))
-            if text_password != "" :    
-                print("text_password : {}".format(text_password))
-
-            result = "Fail"
-            if result == "Fail" :
-                widgets.stackedWidget_setting.setCurrentWidget(widgets.announcement_page)
+            if text_accout == "" :
+                widgets.label_PA2.setText("Please input account.")
+                widgets.label_PA2.setStyleSheet("color:rgb(196, 0, 0);"
+                                                "font-size:15px;") 
 
             else :
+                result = action_list["QU"](client).execute(text_accout)
+                
+
+            if result["status"] == "OK" :
                 widgets.stackedWidget_setting.setCurrentWidget(widgets.btn_logout)
+                widgets.lineEdit_account.clear()
+                widgets.label_PA2.setText("")
+                
+            else :
+                widgets.stackedWidget_setting.setCurrentWidget(widgets.announcement_page)
+                widgets.lineEdit_account.clear()
+                widgets.label_PA2.setText("")
 
         #btn_return
         if btnName == "btn_return":
             widgets.stackedWidget_setting.setCurrentWidget(widgets.login_page)
+            
 
         #btn_sign_up
         if btnName == "btn_sign_up":
             widgets.stackedWidget_setting.setCurrentWidget(widgets.sign_up_page)
+            widgets.lineEdit_account2.clear()
+            widgets.lineEdit_password2.clear()
+            widgets.lineEdit_password3.clear()
 
         #btn_sign_upbtn_sign_up_2
         if btnName == "btn_sign_up_2":
-            
 
-            result = "Fail"
-            if result == "Fail" :
+            text_account2 = widgets.lineEdit_account2.text()
+            if text_account2 == "" :
+                widgets.label_PA_2.setText("Please input account.")
+
+               
+            else :
+                result = action_list["add"](client).execute(text_account2)
+            
+    
+            if result :
+                widgets.stackedWidget_setting.setCurrentWidget(widgets.login_page)
+                widgets.label_PA2.setText("Sign up completely.\nPlease login again.")
+                widgets.label_PA2.setStyleSheet("color:rgb(135, 191, 67);"
+                                                "font-size:15px;") 
+                
+            else :
                 widgets.label_PA_2.setText("The account already exists.")
                 widgets.lineEdit_account2.clear()
                 widgets.lineEdit_password2.clear()
                 widgets.lineEdit_password3.clear()
                 
-            else :
-                widgets.stackedWidget_setting.setCurrentWidget(widgets.login_page)
 
         #btn_logout
         if btnName == "btn_logout":

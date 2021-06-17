@@ -14,6 +14,12 @@
 #
 # ///////////////////////////////////////////////////////////////
 
+#
+# 目前有bug
+# 無法跳到loding畫面
+# 需要用到執行續?
+#
+
 import sys
 import os
 import platform
@@ -120,10 +126,13 @@ class MainWindow(QMainWindow):
             AppFunctions.setThemeHack(self)
 
         # SET HOME PAGE AND SELECT MENU
-        widgets.stackedWidget.setCurrentWidget(widgets.home)
+        
+        widgets.stackedWidget.setCurrentWidget(widgets.loading_page)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
+        
 
         #先不要，會很慢
+        
         client = SocketClient()
         result = action_list["RS"](client).execute()
         print("result : {}".format(result))
@@ -151,6 +160,10 @@ class MainWindow(QMainWindow):
             widgets.tableWidget_home.item(i, 1).setText(text_show_movie_info)
         #home的初始化畫面
         #先不要，會很慢
+        
+        widgets.stackedWidget.setCurrentWidget(widgets.home)
+        widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
+        
 
 
     # BUTTONS CLICK 
@@ -222,30 +235,19 @@ class MainWindow(QMainWindow):
         print("id_movie : {}".format(id_movie))
 
         #widgets.tableWidget_home.item(row, col).setText("456")
-        client = SocketClient()
         #點按鈕才跳畫面
         if col == 0 :
             #切換頁面
-            widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
+            print("1")
+            widgets.stackedWidget.setCurrentWidget(widgets.loading_page) # SET PAGE
             UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
             widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
+            
             #切換頁面
 
             #new_page的初始化畫面
-            result= action_list["QueryMovie"](client).execute(str(id_movie[0]))
-            print("result : {}".format(result))
-
-            list_movie = result["parameters"]
-            dict_movie = list_movie[0]
-            text_show_movie_info = "Num. {}".format(dict_movie["id"])
-            text_show_movie_info += "\nMovie : {}".format(dict_movie["movieName"])
-            text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
-            text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
-            text_show_movie_info += "\nOverview : {}".format(dict_movie["overview"])
-
-            widgets.label_intro.setText(text_show_movie_info)
-
-
+            print("2")
+            self.show_new_page(int(id_movie[0]))
 
 
             """
@@ -270,9 +272,41 @@ class MainWindow(QMainWindow):
                 
             new_page的初始化畫面
             """
-            self.update_tableWidget_NP(name_movie = dict_movie["movieName"], id_movie = dict_movie["id"])
+            print("3")
+            #切換頁面
+            widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
+            UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
+            widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
+            #切換頁面
+            print("4")
+            
 
         #點按鈕才跳畫面
+    def show_new_page(self, id_movie) :
+        
+        #都先抓好資料再轉換頁面
+        client = SocketClient()
+        result= action_list["QueryMovie"](client).execute(int(id_movie))
+        print("result : {}".format(result))
+        list_movie = result["parameters"]
+        dict_movie = list_movie[0]
+
+        self.update_label_intro(dict_movie)
+        self.update_tableWidget_NP(name_movie = dict_movie["movieName"], id_movie = dict_movie["id"])
+        #都先抓好資料再轉換頁面
+        
+
+
+    def update_label_intro(self, dict_movie):
+        #label_intro
+        text_show_movie_info = "Num. {}".format(dict_movie["id"])
+        text_show_movie_info += "\nMovie : {}".format(dict_movie["movieName"])
+        text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
+        text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
+        text_show_movie_info += "\nOverview : {}".format(dict_movie["overview"])
+
+        widgets.label_intro.setText(text_show_movie_info)
+        #label_intro
 
     def update_tableWidget_NP(self, name_movie = None, id_movie = None):
         client = SocketClient()

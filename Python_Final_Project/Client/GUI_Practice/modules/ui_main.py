@@ -893,7 +893,7 @@ class Ui_MainWindow(object):
         self.settingsTopBtn.setMaximumSize(QSize(28, 28))
         self.settingsTopBtn.setCursor(QCursor(Qt.PointingHandCursor))
         icon1 = QIcon()
-        icon1.addFile(u":/icons/images/icons/icon_settings.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u":/icons/images/icons/cil-user.png", QSize(), QIcon.Normal, QIcon.Off)
         self.settingsTopBtn.setIcon(icon1)
         self.settingsTopBtn.setIconSize(QSize(20, 20))
 
@@ -1447,6 +1447,24 @@ class Ui_MainWindow(object):
 
 
         #new_page的GUI
+
+        #loading_page的GUI
+        self.loading_page = QWidget()
+        self.loading_page.setObjectName(u"loading_page")
+        self.verticalLayout_loading = QVBoxLayout(self.loading_page)
+        self.verticalLayout_loading.setObjectName(u"verticalLayout_loading")
+        self.label_loading = QLabel(self.loading_page)
+        self.label_loading.setObjectName(u"label_loading")
+        self.label_loading.setAlignment(Qt.AlignCenter)
+        self.label_loading.setStyleSheet("font-size:50px")
+
+        self.verticalLayout_loading.addWidget(self.label_loading)
+        self.label_loading.setText(QCoreApplication.translate("MainWindow", u"Loading...", None))
+
+        self.stackedWidget.addWidget(self.loading_page)
+        #loading_page的GUI
+
+
 
 
         self.verticalLayout_15.addWidget(self.stackedWidget)

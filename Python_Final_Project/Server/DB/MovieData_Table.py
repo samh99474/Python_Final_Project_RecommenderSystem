@@ -126,36 +126,6 @@ class MovieData_Table:
 
         return [row['vote_count'] for row in record_from_db]
     
-    def select_a_Movie_release_date(self, ID):
-        command = "SELECT * FROM MovieData_Table WHERE id='{}';".format(ID)
-
-        with DBConnection() as connection:
-            cursor = connection.cursor()
-            cursor.execute(command)
-            record_from_db = cursor.fetchall()
-
-        return [row['release_date'] for row in record_from_db]
-    
-    def select_a_Movie_Cast(self, ID):
-        command = "SELECT * FROM MovieData_Table WHERE id='{}';".format(ID)
-
-        with DBConnection() as connection:
-            cursor = connection.cursor()
-            cursor.execute(command)
-            record_from_db = cursor.fetchall()
-
-        return [row['cast'] for row in record_from_db]
-    
-    def select_a_Movie_Crew(self, ID):
-        command = "SELECT * FROM MovieData_Table WHERE id='{}';".format(ID)
-
-        with DBConnection() as connection:
-            cursor = connection.cursor()
-            cursor.execute(command)
-            record_from_db = cursor.fetchall()
-
-        return [row['crew'] for row in record_from_db]
-    
     def select_all_Movie_Info(self):
         command = "SELECT * FROM MovieData_Table;"
 

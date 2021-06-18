@@ -19,7 +19,7 @@ class AddUser():
 
             #先查詢query是否存在用戶名稱
             self.socket_client.send_command("queryUser", query_list_info)
-            print("\nclient send data to server => \'command\':{}, \'parameters\':{}".format("queryUser", query_list_info))
+            print("\nclient send data to server => \'command\':{}, \'parameters\':{}".format("query", query_list_info))
 
             boolean, result = self.socket_client.wait_response()
             result = json.loads(result) # convert dictionary string to dictionary

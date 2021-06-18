@@ -101,8 +101,10 @@ class contentBased_RS:
 
     def weighted_rating(self, x):
         #Calculate score using the IMDB formula of weighted rating (WR)
-        vote_counts = self.smd[self.smd['vote_count'].notnull()]['vote_count'].astype('int')
-        vote_averages = self.smd[self.smd['vote_average'].notnull()]['vote_average'].astype('int')
+        #vote_counts = self.smd[self.smd['vote_count'].notnull()]['vote_count'].astype('int')
+        #vote_averages = self.smd[self.smd['vote_average'].notnull()]['vote_average'].astype('int')
+        vote_counts = self.smd[self.smd['vote_count'].notnull()]['vote_count']
+        vote_averages = self.smd[self.smd['vote_average'].notnull()]['vote_average']
         self.C = vote_averages.mean()
         self.m = vote_counts.quantile(0.8)
 
@@ -125,8 +127,8 @@ class contentBased_RS:
         C = vote_averages.mean()
         m = vote_counts.quantile(0.60)
         qualified = movies[(movies['vote_count'] >= m) & (movies['vote_count'].notnull()) & (movies['vote_average'].notnull())]
-        qualified['vote_count'] = qualified['vote_count'].astype('int')
-        qualified['vote_average'] = qualified['vote_average'].astype('int')
+        #qualified['vote_count'] = qualified['vote_count'].astype('int')
+        #qualified['vote_average'] = qualified['vote_average'].astype('int')
         qualified['wr'] = qualified.apply(self.weighted_rating, axis=1)
         qualified = qualified.sort_values('wr', ascending=False).head(Recommed_Top_Num)
         return qualified

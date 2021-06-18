@@ -1038,7 +1038,7 @@ class Ui_MainWindow(object):
 
         #設定row的數目
         #print("self.tableWidget_home.rowCount() : {}".format(self.tableWidget_home.rowCount()))
-        amount_row = 5
+        amount_row = 10
         if (self.tableWidget_home.rowCount() < amount_row):
             self.tableWidget_home.setRowCount(amount_row)
         #設定row的數目
@@ -1199,7 +1199,7 @@ class Ui_MainWindow(object):
         self.label_video.setText(QCoreApplication.translate("MainWindow", u"SHOW VIDEO", None))
         #self.label_video.setStyleSheet(u"background-image: url(:images/images/messageImage_1624019018217.jpg);")
         #self.label_video.setPixmap(QPixmap("./images/messageImage_1624019018217.jpg"))
-        self.label_video.setPixmap(QPixmap("./GUI_Practice/images/images/messageImage_1624019018217.jpg"))
+        self.label_video.setPixmap(QPixmap("./images/images/messageImage_1624019018217.jpg"))
         self.label_video.setScaledContents(True)
         self.label_video.setMinimumSize(QSize(561, 355.8))
         

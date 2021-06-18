@@ -56,6 +56,8 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         #self = QMainWindow
 
+        self.client = SocketClient()
+
         # SET AS GLOBAL WIDGETS
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -143,8 +145,8 @@ class MainWindow(QMainWindow):
         
 
         #先不要，會很慢
-        client = SocketClient()
-        result = action_list["RS"](client).execute()
+
+        result = action_list["RS"](self.client).execute()
         print("result : {}".format(result))
         #home的初始化畫面
         #parameters
@@ -154,6 +156,7 @@ class MainWindow(QMainWindow):
         result_REC = result["parameters"]
         print(len(result))
         for i in range(len(result_REC)) :
+            text_show_movie_info = ""   #initial text_show_movie_info
             dict_movie = result_REC[i]
             """
             print("\nMovie {}".format(i))
@@ -261,9 +264,9 @@ class MainWindow(QMainWindow):
 
             print("3")
             #切換new_page頁面
-            # widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
-            # UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
-            # widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
+            widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
+            UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
+            widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
             #切換new_page頁面
             print("4")
             
@@ -272,8 +275,8 @@ class MainWindow(QMainWindow):
     def show_new_page(self, id_movie) :
         
         #都先抓好資料再轉換頁面
-        client = SocketClient()
-        result= action_list["QueryMovie"](client).execute(int(id_movie))
+
+        result= action_list["QueryMovie"](self.client).execute(int(id_movie))
         print("result : {}".format(result))
         list_movie = result["parameters"]
         dict_movie = list_movie[0]
@@ -304,14 +307,14 @@ class MainWindow(QMainWindow):
         #label_intro
 
     def update_tableWidget_NP(self, name_movie = None, id_movie = None):
-        client = SocketClient()
+
         if self.user_name != None and self.user_id != None :
             print("user_name : {}, user_id : {}".format(self.user_name, self.user_id))
-            result = action_list["RS"](client).execute(userName = self.user_name, userId = self.user_id, movieTitle = name_movie, id = int(id_movie))
+            result = action_list["RS"](self.client).execute(userName = self.user_name, userId = self.user_id, movieTitle = name_movie, id = int(id_movie))
         
         else :
             print("user_name : {}, user_id : {}".format(self.user_name, self.user_id))
-            result = action_list["RS"](client).execute(movieTitle = name_movie, id = int(id_movie))
+            result = action_list["RS"](self.client).execute(movieTitle = name_movie, id = int(id_movie))
 
         print("result : {}".format(result))
         #tableWidget_NP的初始化畫面
@@ -344,7 +347,7 @@ class MainWindow(QMainWindow):
         widgets.lineEdit_rating.clear()
         widgets.label_rPA.setText("")
 
-        client = SocketClient()
+
 
         #取出tableWidget_NP的資訊
         text = widgets.tableWidget_NP.item(row, 1).text()
@@ -359,7 +362,7 @@ class MainWindow(QMainWindow):
 
         if col == 0 :
             #更新label_intro
-            result= action_list["QueryMovie"](client).execute(str(id_movie[0]))
+            result= action_list["QueryMovie"](self.client).execute(str(id_movie[0]))
             print("result : {}".format(result))
 
             list_movie = result["parameters"]
@@ -387,7 +390,6 @@ class MainWindow(QMainWindow):
         # GET BUTTON CLICKED
         btn = self.sender()
         btnName = btn.objectName()
-        client = SocketClient()
 
         #btn_login
         if btnName == "btn_login":
@@ -409,7 +411,7 @@ class MainWindow(QMainWindow):
                                                 "font-size:15px;") 
 
             else :
-                result = action_list["IU"](client).execute(text_accout, text_password)
+                result = action_list["IU"](self.client).execute(text_accout, text_password)
                 
             parameters = result["parameters"][0]
             if result["status"] == "OK" :
@@ -464,7 +466,7 @@ class MainWindow(QMainWindow):
                 widgets.label_PA_2.setText("Password confirms wrongly.")
                
             else :
-                result = action_list["add"](client).execute(text_account2, text_password2)
+                result = action_list["add"](self.client).execute(text_account2, text_password2)
             
     
             if result :
@@ -515,7 +517,7 @@ class MainWindow(QMainWindow):
                 print("int(text_rating) : {}".format(int(text_rating)))
 
 
-                result = action_list["rating"](client).execute(self.user_name, self.user_id, self.movieId, int(text_rating))
+                result = action_list["rating"](self.client).execute(self.user_name, self.user_id, self.movieId, int(text_rating))
                 
                 print("result : {}".format(result))
                 if result["status"] == "OK" :

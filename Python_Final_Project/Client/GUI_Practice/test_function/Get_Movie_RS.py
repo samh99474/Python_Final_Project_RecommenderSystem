@@ -37,7 +37,7 @@ class Get_Movie_RS():
 
             print("輸入欲得到之推薦數量:")
             #Recommed_Top_Num = int(input("  Please input a Recommed_Top_Num: "))
-            Recommed_Top_Num = 5
+            Recommed_Top_Num = 10
             RS_dict["Recommed_Top_Num"] = Recommed_Top_Num
 
             RS_list_info = list()

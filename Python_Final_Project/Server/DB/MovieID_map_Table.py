@@ -31,7 +31,7 @@ class MovieID_map_Table:
         command = "SELECT * FROM MovieID_map_Table WHERE id ='{}';".format(ID)
 
         with DBConnection() as connection:
-            cursor = connection.cursor()+
+            cursor = connection.cursor()
             cursor.execute(command)
             record_from_db = cursor.fetchall()
 

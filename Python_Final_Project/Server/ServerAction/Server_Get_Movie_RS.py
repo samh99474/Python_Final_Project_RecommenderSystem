@@ -23,10 +23,15 @@ class Server_Get_Movie_RS:
                 id = info["id"]
                 Recommed_Top_Num = info["Recommed_Top_Num"]
                 RS_method = info["RS_method"]
+                print("info : {}".format(info))
 
-            RS_result = RS_action_list[RS_method]().execute(userId=userId, Watched_Movie_title=movieTitle, Watched_Movie_ID=id, 
-            Recommed_Top_Num=Recommed_Top_Num)
-
+            print("1")  #這裡有bug，如果有新增評分的話
+            print("userId : {}".format(userId))
+            print("Watched_Movie_title : {}".format(movieTitle))
+            print("Watched_Movie_ID : {}".format(id))
+            print("Recommed_Top_Num : {}".format(Recommed_Top_Num))
+            RS_result = RS_action_list[RS_method]().execute(userId=userId, Watched_Movie_title=movieTitle, Watched_Movie_ID=id, Recommed_Top_Num=Recommed_Top_Num)
+            print("2")  #這裡有bug，如果有新增評分的話
             status = True
 
         except Exception as e:  # 若try有錯誤，則執行except

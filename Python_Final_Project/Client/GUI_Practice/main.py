@@ -246,6 +246,7 @@ class MainWindow(QMainWindow):
         #widgets.tableWidget_home.item(row, col).setText("456")
         #點按鈕才跳畫面
         if col == 0 :
+            #一樣會先等資料都傳送過來才切換頁面，也許要用執行續
             #切換loading_page頁面
             print("1")
             widgets.stackedWidget.setCurrentWidget(widgets.loading_page) # SET PAGE
@@ -253,6 +254,7 @@ class MainWindow(QMainWindow):
             widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
             print("2")
             #切換loading_page頁面
+            #一樣會先等資料都傳送過來才切換頁面，也許要用執行續
 
             
             self.show_new_page(int(id_movie[0]))

@@ -3,6 +3,7 @@ from ServerAction.Server_AddUser import Server_AddUser
 from ServerAction.Server_QueryUser import Server_QueryUser
 from ServerAction.Server_QueryMovie import Server_QueryMovie
 from ServerAction.Server_Rating import Server_Rating
+from ServerAction.Server_IdentifyUser import Server_IdentifyUser
 
 from Socket_Server import SocketServer
 
@@ -17,7 +18,8 @@ action_list = {
     "queryUser": Server_QueryUser,
     "queryMovie":Server_QueryMovie,
     "addUser": Server_AddUser,
-    "rating": Server_Rating
+    "rating": Server_Rating,
+    "identifyUser" : Server_IdentifyUser
 }
 class JobDispatcher:
     def __init__(self):

@@ -1198,66 +1198,58 @@ class Ui_MainWindow(object):
         self.label_video.setAlignment(Qt.AlignCenter)
         self.label_video.setText(QCoreApplication.translate("MainWindow", u"SHOW VIDEO", None))
 
-        self.gridLayout_NP.addWidget(self.label_video, 0, 0, 2, 2)
+        self.gridLayout_NP.addWidget(self.label_video, 0, 0, 2, 5)
         #新增label_video
 
-        #新增label_status
-        """
-        #設定scrollArea_status
-        self.scrollArea_status = QScrollArea(self.row_NP)
-        self.scrollArea_status.setObjectName(u"scrollArea_status")
-        self.scrollArea_status.setStyleSheet(u" QScrollBar:vertical {\n"
-"    background: rgb(52, 59, 72);\n"
-" }\n"
-" QScrollBar:horizontal {\n"
-"    background: rgb(52, 59, 72);\n"
-" }")
-        self.scrollArea_status.setFrameShape(QFrame.NoFrame)
-        self.scrollArea_status.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        self.scrollArea_status.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.scrollArea_status.setWidgetResizable(True)
-        self.scrollArea_status.setStyleSheet(u" QScrollBar:vertical {\n"
-                                                "background: rgb(52, 59, 72);\n"  #scroll bar的背景顏色
-                                                "}\n"
-                                                " QScrollBar:horizontal {\n"
-                                                "    background: rgb(52, 59, 72);\n"
-                                                " }\n"
-                                                "QScrollArea{\n"  #QScrollArea的背景顏色
-                                                "background: rgb(33, 37, 43);"
-                                                "border-radius: 10px;\n"
-                                                "}\n"
-                                                )
-        #設定scrollArea_NP
-        
-        #設定scrollArea_WidgetContents_status
-        self.scrollArea_WidgetContents_status = QWidget()
-        self.scrollArea_WidgetContents_status.setObjectName(u"scrollArea_WidgetContents_status")
-        self.scrollArea_WidgetContents_status.setGeometry(QRect(0, 0, 218, 218))
-        self.scrollArea_WidgetContents_status.setStyleSheet(u" QScrollBar:vertical {\n"
-                                                                "	border: none;\n"
-                                                                "    background: rgb(52, 59, 72);\n"
-                                                                "    width: 14px;\n"
-                                                                "    margin: 21px 0 21px 0;\n"
-                                                                "	border-radius: 0px;\n"
-                                                                " }")
-        #原本顏色為background: rgb(52, 59, 72)
-        #設定scrollArea_WidgetContents_status
+        #新增label_rating
+        self.label_rating = QLabel(self.row_NP)
+        self.label_rating.setObjectName(u"label_rating")
+        self.label_rating.setAlignment(Qt.AlignCenter)
+        self.label_rating.setText(QCoreApplication.translate("MainWindow", u"Rating :", None))
 
-        self.horizontalLayout_status = QHBoxLayout(self.scrollArea_WidgetContents_status)
-        self.horizontalLayout_status.setObjectName(u"horizontalLayout_status")
+        self.gridLayout_NP.addWidget(self.label_rating, 1, 0, 1, 1)
+        #新增label_rating
 
-        self.label_status = QLabel(self.scrollArea_WidgetContents_status)
-        self.label_status.setObjectName(u"label_video")
-        self.label_status.setAlignment(Qt.AlignCenter)
-        self.label_status.setMinimumSize(QSize(700, 200))
-        self.label_status.setText(QCoreApplication.translate("MainWindow", u"SHOW STATUS", None))
-        self.horizontalLayout_status.addWidget(self.label_status)
+        #新增lineEdit_rating
+        self.lineEdit_rating = QLineEdit(self.row_NP)
+        self.lineEdit_rating.setObjectName(u"lineEdit_rating")
+        self.lineEdit_rating.setMinimumSize(QSize(40, 30))
+        self.lineEdit_rating.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.lineEdit_rating.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your rating", None))
+        self.gridLayout_NP.addWidget(self.lineEdit_rating, 1, 1, 1, 1)
+        #新增lineEdit_rating
+        font_rating = QFont()
+        font_rating.setFamily(u"Segoe UI")
+        font_rating.setPointSize(15)
+        font_rating.setBold(False)
+        font_rating.setItalic(False)
 
-        self.scrollArea_status.setWidget(self.scrollArea_WidgetContents_status)
+        #btn_rating
+        self.btn_rating = QPushButton(self.row_NP)
+        self.btn_rating.setObjectName(u"btn_rating")
+        sizePolicy.setHeightForWidth(self.btn_rating.sizePolicy().hasHeightForWidth())
+        self.btn_rating.setSizePolicy(sizePolicy)
+        self.btn_rating.setMinimumSize(QSize(0, 45))
+        self.btn_rating.setFont(font_rating)
+        self.btn_rating.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_rating.setLayoutDirection(Qt.LeftToRight)
+        self.btn_rating.setText(QCoreApplication.translate("MainWindow", u"Send", None))
+        self.gridLayout_NP.addWidget(self.btn_rating, 1, 2, 1, 1)
+        #btn_rating
 
-        self.gridLayout_NP.addWidget(self.scrollArea_status, 2, 0, 1, 2)
-        """
-        #新增label_status
+
+        #新增label_rPA
+        self.label_rPA = QLabel(self.row_NP)
+        self.label_rPA.setObjectName(u"label_rPA")
+        self.label_rPA.setAlignment(Qt.AlignCenter)
+        self.label_rPA.setText(QCoreApplication.translate("MainWindow", u"", None))
+
+        self.gridLayout_NP.addWidget(self.label_rPA, 1, 3, 1, 1)
+        #新增label_rPA
+
+
+
+
 
         #新增label_intro
         #設定scrollArea_intro
@@ -1314,7 +1306,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_intro.addWidget(self.label_intro)
 
         self.scrollArea_intro.setWidget(self.scrollArea_WidgetContents_intro)
-        self.gridLayout_NP.addWidget(self.scrollArea_intro, 2, 0, 2, 2)
+        self.gridLayout_NP.addWidget(self.scrollArea_intro, 2, 0, 1, 5)
         #新增label_intro
 
         #新增tableWidget_NP
@@ -1416,21 +1408,23 @@ class Ui_MainWindow(object):
 
         #設定tableWidget_NP
 
-        self.gridLayout_NP.addWidget(self.tableWidget_NP, 0, 2, 4, 1)
+        self.gridLayout_NP.addWidget(self.tableWidget_NP, 0, 5, 3, 1)
 
         #設定gridLayout_NP的row和col的比例
-        
-        #設定各別row所占的比例
-        self.gridLayout_NP.setRowStretch(0, 1)
-        self.gridLayout_NP.setRowStretch(1, 1)
-        self.gridLayout_NP.setRowStretch(2, 1)
-        self.gridLayout_NP.setRowStretch(3, 1)
-        #設定各別row所占的比例
 
+        #設定各別row所占的比例
+        self.gridLayout_NP.setRowStretch(0, 3)  
+        self.gridLayout_NP.setRowStretch(1, 1)
+        self.gridLayout_NP.setRowStretch(2, 3)
+        #設定各別row所占的比例
+        
         #設定各別col所占的比例
-        self.gridLayout_NP.setColumnStretch(0, 1)  
-        self.gridLayout_NP.setColumnStretch(1, 1)
+        self.gridLayout_NP.setColumnStretch(0, 1)
+        self.gridLayout_NP.setColumnStretch(1, 2)
         self.gridLayout_NP.setColumnStretch(2, 1)
+        self.gridLayout_NP.setColumnStretch(3, 2)
+        self.gridLayout_NP.setColumnStretch(4, 2)
+        self.gridLayout_NP.setColumnStretch(5, 4)
         #設定各別col所占的比例
         
         #設定gridLayout_NP的row和col的比例

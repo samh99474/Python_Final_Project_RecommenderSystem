@@ -16,8 +16,8 @@
 
 #
 # 目前有bug
-# 無法跳到loding畫面
 # 需要用到執行續?
+# 已經資料出來才跳畫面
 #
 
 import sys
@@ -37,13 +37,15 @@ from test_function.Rating import Rating
 from test_function.QueryMovie import QueryMovie
 from test_function.QueryUser import QueryUser
 from test_function.AnalyzeData import AnalyzeData
+from test_function.IdentifyUser import IdentifyUser
 
 action_list = {
     "add": AddUser,
     "RS" : Get_Movie_RS,
     "rating": Rating,
     "QueryMovie": QueryMovie,
-    "QU" : QueryUser
+    "QU" : QueryUser,
+    "IU" : IdentifyUser
 }
 
 
@@ -62,6 +64,7 @@ class MainWindow(QMainWindow):
 
         self.user_name = None
         self.user_id = None
+        self.movieId = None
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = True
@@ -98,6 +101,9 @@ class MainWindow(QMainWindow):
         # EXTRA RIGHT BOX
         def openCloseRightBox():
             UIFunctions.toggleRightBox(self, True)
+            if self.user_name == None and self.user_id == None :
+                widgets.stackedWidget_setting.setCurrentWidget(widgets.btn_login)
+            
         widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
 
         #Setting function
@@ -108,6 +114,10 @@ class MainWindow(QMainWindow):
         widgets.btn_sign_up.clicked.connect(self.buttonClick_setting)
         widgets.btn_sign_up_2.clicked.connect(self.buttonClick_setting)
         #Setting function
+
+        #rating function
+        widgets.btn_rating.clicked.connect(self.buttonClick_setting)
+        #rating function
 
 
         # SHOW APP
@@ -126,13 +136,13 @@ class MainWindow(QMainWindow):
             AppFunctions.setThemeHack(self)
 
         # SET HOME PAGE AND SELECT MENU
-        
+        #先切到loading的畫面
         widgets.stackedWidget.setCurrentWidget(widgets.loading_page)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
+        #先切到loading的畫面
         
 
         #先不要，會很慢
-        
         client = SocketClient()
         result = action_list["RS"](client).execute()
         print("result : {}".format(result))
@@ -161,8 +171,10 @@ class MainWindow(QMainWindow):
         #home的初始化畫面
         #先不要，會很慢
         
+        #等到好了再切到home畫面
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
+        #等到好了再切到home畫面
         
 
 
@@ -185,6 +197,9 @@ class MainWindow(QMainWindow):
             widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+
+            widgets.lineEdit_rating.clear()
+            widgets.label_rPA.setText("")
 
         if btnName == "btn_save":
             print("Save BTN clicked!")
@@ -220,12 +235,6 @@ class MainWindow(QMainWindow):
         sf = "You clicked on [{},{}]".format(row,col) 
         print(sf) 
         
-        """
-        item_test = QTableWidgetItem()  #要先設置item，在放進去table
-        item_test.setText("123")
-        widgets.tableWidget_home.setItem(row, col, item_test)
-        """
-        
         text = widgets.tableWidget_home.item(row, 1).text()
         
         print(text)
@@ -237,47 +246,23 @@ class MainWindow(QMainWindow):
         #widgets.tableWidget_home.item(row, col).setText("456")
         #點按鈕才跳畫面
         if col == 0 :
-            #切換頁面
+            #切換loading_page頁面
             print("1")
             widgets.stackedWidget.setCurrentWidget(widgets.loading_page) # SET PAGE
             UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
             widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
-            
-            #切換頁面
-
-            #new_page的初始化畫面
             print("2")
+            #切換loading_page頁面
+
+            
             self.show_new_page(int(id_movie[0]))
 
-
-            """
-            result_QM = result["parameters"]
-            print(len(result))
-            for i in range(len(result_QM)) :
-                dict_movie = result_QM[i]
-           
-
-                print("\nMovie {}".format(i))
-                print("Movie : {}".format(dict_movie["title"]))
-                print("Vote average : {}".format(dict_movie["vote_average"]))
-                print("Genres : {}".format(dict_movie["genres"]))
-               
-                #text_show_movie_info = "Movie {}".format(i)
-                text_show_movie_info = "Num. {}".format(dict_movie["id"])
-                text_show_movie_info += "\nMovie : {}".format(dict_movie["title"])
-                text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
-                text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
-                print(text_show_movie_info)
-                widgets.tableWidget_home.item(i, 1).setText(text_show_movie_info)
-                
-            new_page的初始化畫面
-            """
             print("3")
-            #切換頁面
-            widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
-            UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
-            widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
-            #切換頁面
+            #切換new_page頁面
+            # widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
+            # UIFunctions.resetStyle(self, "btn_new") # RESET ANOTHERS BUTTONS SELECTED
+            # widgets.btn_new.setStyleSheet(UIFunctions.selectMenu(widgets.btn_new.styleSheet())) # SELECT MENU
+            #切換new_page頁面
             print("4")
             
 
@@ -290,9 +275,13 @@ class MainWindow(QMainWindow):
         print("result : {}".format(result))
         list_movie = result["parameters"]
         dict_movie = list_movie[0]
+        self.movieId = dict_movie["movieId"]
 
         self.update_label_intro(dict_movie)
         self.update_tableWidget_NP(name_movie = dict_movie["movieName"], id_movie = dict_movie["id"])
+
+        widgets.lineEdit_rating.clear()
+        widgets.label_rPA.setText("")
         #都先抓好資料再轉換頁面
         
 
@@ -375,8 +364,9 @@ class MainWindow(QMainWindow):
 
             widgets.label_intro.setText(text_show_movie_info)
             #更新label_intro
-
-            self.update_tableWidget_NP(name_movie[0], int(id_movie[0]))
+            widgets.lineEdit_rating.clear()
+            self.update_tableWidget_NP(name_movie[0], dict_movie["id"])
+            
 
     def test(self):
         print("HI")
@@ -402,8 +392,13 @@ class MainWindow(QMainWindow):
                 widgets.label_PA2.setStyleSheet("color:rgb(196, 0, 0);"
                                                 "font-size:15px;") 
 
+            elif text_password == "" :
+                widgets.label_PA2.setText("Please input password.")
+                widgets.label_PA2.setStyleSheet("color:rgb(196, 0, 0);"
+                                                "font-size:15px;") 
+
             else :
-                result = action_list["QU"](client).execute(text_accout)
+                result = action_list["IU"](client).execute(text_accout, text_password)
                 
             parameters = result["parameters"][0]
             if result["status"] == "OK" :
@@ -412,11 +407,19 @@ class MainWindow(QMainWindow):
                 #print("user_name : {}, user_id : {}".format(self.user_name, self.user_id))
                 widgets.stackedWidget_setting.setCurrentWidget(widgets.btn_logout)
                 widgets.lineEdit_account.clear()
+                widgets.lineEdit_password.clear()
                 widgets.label_PA2.setText("")
+
+                #等到好了再切到home畫面
+                widgets.stackedWidget.setCurrentWidget(widgets.home)
+                UIFunctions.resetStyle(self, "btn_home") # RESET ANOTHERS BUTTONS SELECTED
+                widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
+                #等到好了再切到home畫面
                 
             else :
                 widgets.stackedWidget_setting.setCurrentWidget(widgets.announcement_page)
                 widgets.lineEdit_account.clear()
+                widgets.lineEdit_password.clear()
                 widgets.label_PA2.setText("")
 
         #btn_return
@@ -431,16 +434,26 @@ class MainWindow(QMainWindow):
             widgets.lineEdit_password2.clear()
             widgets.lineEdit_password3.clear()
 
-        #btn_sign_upbtn_sign_up_2
+        #btn_sign_up_2
         if btnName == "btn_sign_up_2":
 
             text_account2 = widgets.lineEdit_account2.text()
+            text_password2 = widgets.lineEdit_password2.text()
+            text_password3 = widgets.lineEdit_password3.text()
             if text_account2 == "" :
                 widgets.label_PA_2.setText("Please input account.")
 
+            elif text_password2 == "" :
+                widgets.label_PA_2.setText("Please input password.")
+            
+            elif text_password3 == "" :
+                widgets.label_PA_2.setText("Please input password again.")
+
+            elif text_password2 != text_password3 :
+                widgets.label_PA_2.setText("Password confirms wrongly.")
                
             else :
-                result = action_list["add"](client).execute(text_account2)
+                result = action_list["add"](client).execute(text_account2, text_password2)
             
     
             if result :
@@ -461,6 +474,53 @@ class MainWindow(QMainWindow):
             widgets.stackedWidget_setting.setCurrentWidget(widgets.btn_login) # SET PAGE
             self.user_name = None
             self.user_id = None
+
+            #等到好了再切到home畫面
+            widgets.stackedWidget.setCurrentWidget(widgets.home)
+            UIFunctions.resetStyle(self, "btn_home") # RESET ANOTHERS BUTTONS SELECTED
+            widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
+            #等到好了再切到home畫面
+
+        if btnName == "btn_rating" :
+            text_rating = widgets.lineEdit_rating.text()
+
+            if self.user_name == None and self.user_id == None :
+                widgets.lineEdit_rating.clear()
+                widgets.label_rPA.setText("Please login first.")
+                widgets.label_rPA.setStyleSheet("color:rgb(196, 0, 0);"
+                                                "font-size:15px;") 
+            
+            elif text_rating == "" :
+                widgets.label_rPA.setText("Please type your rating.")
+                widgets.label_rPA.setStyleSheet("color:rgb(196, 0, 0);"
+                                                "font-size:15px;")
+
+            elif int(text_rating) < 0 or int(text_rating) > 5 :
+                widgets.label_rPA.setText("Rating range from 0 to 5!")
+                widgets.label_rPA.setStyleSheet("color:rgb(196, 0, 0);"
+                                                "font-size:15px;")
+                
+            else :
+                print("int(text_rating) : {}".format(int(text_rating)))
+
+
+                result = action_list["rating"](client).execute(self.user_name, self.user_id, self.movieId, int(text_rating))
+                
+                print("result : {}".format(result))
+                if result["status"] == "OK" :
+                    widgets.label_rPA.setText("Rating completely.")
+                    widgets.label_rPA.setStyleSheet("color:rgb(135, 191, 67);"
+                                                "font-size:15px;")  
+                else : 
+                    widgets.label_rPA.setText("Rating unsuccessfully.")
+                    widgets.label_rPA.setStyleSheet("color:rgb(196, 0, 0);"
+                                                "font-size:15px;") 
+
+                widgets.lineEdit_rating.clear()
+
+                
+
+            
 
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')

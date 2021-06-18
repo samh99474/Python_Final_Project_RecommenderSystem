@@ -11,6 +11,7 @@ class QueryUser():
             add_user_dict = dict()
             query_user_dict = dict()
             query_user_dict["userName"] = userName
+            query_user_dict["userPassword"] = userPassword
 
             query_list_info = list()
             query_list_info.append(query_user_dict)
@@ -26,6 +27,7 @@ class QueryUser():
                 print("此名稱不存在，您可以新增此學生")
                 add_user_dict["userName"] = userName  
                 success = True
+
             else:
                 print("此名稱存在，您不可以新增此學生")
                 success = False

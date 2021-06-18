@@ -12,9 +12,12 @@ class Server_AddUser:
             for info in parameters:
                 
                 user_id = User_info_Table().select_a_userId(info["userName"])
+                print("user_id : {}".format(user_id))
                 if(len(user_id)==0):
-                    User_info_Table().insert_a_user(info["userName"])
+                    User_info_Table().insert_a_user(info["userName"], info["userPassword"])
+                    
                     user_id = User_info_Table().select_a_userId(info["userName"])
+                   
 
                     status = True
                 else:
@@ -27,6 +30,8 @@ class Server_AddUser:
         if(status == True):
             #StudentInfoProcessor().restore_student_file(self.student_dict)   #新資料結合舊資料成功後，存檔
             reply_msg = {'status': "OK", 'parameters': parameters}
+
         else:
             reply_msg = {'status': "Fail", 'parameters': parameters, 'reason': "The name already exists."}
+
         return reply_msg

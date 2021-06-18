@@ -1038,7 +1038,7 @@ class Ui_MainWindow(object):
 
         #設定row的數目
         #print("self.tableWidget_home.rowCount() : {}".format(self.tableWidget_home.rowCount()))
-        amount_row = 10
+        amount_row = 5
         if (self.tableWidget_home.rowCount() < amount_row):
             self.tableWidget_home.setRowCount(amount_row)
         #設定row的數目
@@ -1197,8 +1197,13 @@ class Ui_MainWindow(object):
         self.label_video.setObjectName(u"label_video")
         self.label_video.setAlignment(Qt.AlignCenter)
         self.label_video.setText(QCoreApplication.translate("MainWindow", u"SHOW VIDEO", None))
-
-        self.gridLayout_NP.addWidget(self.label_video, 0, 0, 2, 5)
+        #self.label_video.setStyleSheet(u"background-image: url(:images/images/messageImage_1624019018217.jpg);")
+        #self.label_video.setPixmap(QPixmap("./images/messageImage_1624019018217.jpg"))
+        self.label_video.setPixmap(QPixmap("./GUI_Practice/images/images/messageImage_1624019018217.jpg"))
+        self.label_video.setScaledContents(True)
+        self.label_video.setMinimumSize(QSize(561, 355.8))
+        
+        self.gridLayout_NP.addWidget(self.label_video, 0, 0, 1, 5)
         #新增label_video
 
         #新增label_rating
@@ -1291,15 +1296,18 @@ class Ui_MainWindow(object):
         self.horizontalLayout_intro.setObjectName(u"horizontalLayout_intro")
 
 
-        font_label = QFont()
-        font_label.setFamily(u"Segoe UI")
-        font_label.setPointSize(100)
-        font_label.setBold(False)
-        font_label.setItalic(False)
+        # font_label = QFont()
+        # font_label.setFamily(u"Segoe UI")
+        # font_label.setPointSize(100)
+        # font_label.setBold(False)
+        # font_label.setItalic(False)
 
         self.label_intro = QLabel(self.scrollArea_WidgetContents_intro)
-        self.label_intro.setFont(font_label)  #字體大小無法改
+        #self.label_intro.setFont(font_label)  #字體大小無法改
         self.label_intro.setObjectName(u"label_video")
+        self.label_intro.setWordWrap(True)  #有時會自動換行，有時不會
+        self.label_intro.setText("Show description of movie.")
+        self.label_intro.setStyleSheet("font-size:20px;") 
         #self.label_intro.setAlignment(Qt.AlignCenter)
         #self.label_intro.setText(QCoreApplication.translate("MainWindow", u"SHOW INTRODUCTION", None))
         self.label_intro.setMinimumSize(QSize(700, 100))

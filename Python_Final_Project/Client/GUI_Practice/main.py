@@ -278,6 +278,7 @@ class MainWindow(QMainWindow):
         list_movie = result["parameters"]
         dict_movie = list_movie[0]
         self.movieId = dict_movie["movieId"]
+        print("self.movieId : {}".format(self.movieId))
 
         self.update_label_intro(dict_movie)
         self.update_tableWidget_NP(name_movie = dict_movie["movieName"], id_movie = dict_movie["id"])
@@ -290,11 +291,14 @@ class MainWindow(QMainWindow):
 
     def update_label_intro(self, dict_movie):
         #label_intro
+        self.movieId = dict_movie["movieId"]
+        print("self.movieId : {}".format(self.movieId))
         text_show_movie_info = "Num. {}".format(dict_movie["id"])
-        text_show_movie_info += "\nMovie : {}".format(dict_movie["movieName"])
-        text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
-        text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
-        text_show_movie_info += "\nOverview : {}".format(dict_movie["overview"])
+        text_show_movie_info += "\n\nMovie : {}".format(dict_movie["movieName"])
+        text_show_movie_info += "\n\nVote average : {}".format(dict_movie["vote_average"])
+        text_show_movie_info += "\n\nGenres : {}".format(dict_movie["genres"])
+        text_show_movie_info += "\n\nOverview : {}".format(dict_movie["overview"])
+        text_show_movie_info += "\n\nmovieId : {}".format(dict_movie["movieId"])
 
         widgets.label_intro.setText(text_show_movie_info)
         #label_intro
@@ -337,6 +341,8 @@ class MainWindow(QMainWindow):
     def click_tableWidget_NP(self, row, col):
         sf = "You clicked on [{},{}]".format(row,col) 
         print(sf) 
+        widgets.lineEdit_rating.clear()
+        widgets.label_rPA.setText("")
 
         client = SocketClient()
 
@@ -358,11 +364,14 @@ class MainWindow(QMainWindow):
 
             list_movie = result["parameters"]
             dict_movie = list_movie[0]
+            self.movieId = dict_movie["movieId"]
+            print("self.movieId : {}".format(self.movieId))
             text_show_movie_info = "Num. {}".format(dict_movie["id"])
-            text_show_movie_info += "\nMovie : {}".format(dict_movie["movieName"])
-            text_show_movie_info += "\nVote average : {}".format(dict_movie["vote_average"])
-            text_show_movie_info += "\nGenres : {}".format(dict_movie["genres"])
-            text_show_movie_info += "\nOverview : {}".format(dict_movie["overview"])
+            text_show_movie_info += "\n\nMovie : {}".format(dict_movie["movieName"])
+            text_show_movie_info += "\n\nVote average : {}".format(dict_movie["vote_average"])
+            text_show_movie_info += "\n\nGenres : {}".format(dict_movie["genres"])
+            text_show_movie_info += "\n\nOverview : {}".format(dict_movie["overview"])
+            text_show_movie_info += "\n\nmovieId : {}".format(dict_movie["movieId"])
 
             widgets.label_intro.setText(text_show_movie_info)
             #更新label_intro

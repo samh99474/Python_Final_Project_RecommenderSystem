@@ -18,8 +18,9 @@ class Ratings_Table:
             cursor.execute(command)
             record_from_db = cursor.fetchall()
 
-        return [row['rating'] for row in record_from_db], [row['timestamp'] for row in record_from_db]
-    
+        #return [row['rating'] for row in record_from_db], [row['timestamp'] for row in record_from_db]
+        return [row['rating'] for row in record_from_db]
+        
     def select_a_User_all_ratings(self, userId:int):
         command = "SELECT * FROM Ratings_Table WHERE userId ='{}';".format(userId)
 

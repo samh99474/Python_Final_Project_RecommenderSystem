@@ -58,7 +58,8 @@ necessary_table_to_create = {
             CREATE TABLE User_info_Table
             (
                 userId INTEGER PRIMARY KEY,
-                userName VARCHAR(255)         
+                userName VARCHAR(255),
+                userPassword VARCHAR(255) 
             );
         """,
 }

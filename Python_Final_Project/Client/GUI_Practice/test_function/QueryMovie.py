@@ -3,13 +3,13 @@ class QueryMovie():
     def __init__(self, socket_client):
         self.socket_client = socket_client
 
-    def execute(self):
+    def execute(self, movieId):
         try:
             query_movie_dict = dict()
             query_movie_list = list()
 
             print("請輸入欲查詢之電影id")
-            movieId = int(input("  Please input a movie's id: "))
+            #movieId = int(input("  Please input a movie's id: "))
             query_movie_dict["id"] = movieId
 
             query_movie_list.append(query_movie_dict)
@@ -35,3 +35,4 @@ class QueryMovie():
             else:
                 print("查詢失敗")
             print("Execution result is {}".format(success))
+            return result

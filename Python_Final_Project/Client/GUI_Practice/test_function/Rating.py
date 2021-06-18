@@ -3,24 +3,24 @@ class Rating():
     def __init__(self, socket_client):
         self.socket_client = socket_client
 
-    def execute(self):
+    def execute(self, userName = None, userId = None, movieId = None, rating = None):
         try:
             rating_dict = dict()
             rating_list = list()
             print("用戶姓名")
-            userName = str(input("  Please input a user's name: "))
+            #userName = str(input("  Please input a user's name: "))
             rating_dict["userName"] = userName
 
             print("用戶ID")
-            userId = str(input("  Please input a user's ID: "))
+            #userId = str(input("  Please input a user's ID: "))
             rating_dict["userId"] = userId
 
             print("請輸入電影movieId")
-            movieId = int(input("  Please input a movieId: "))
+            #movieId = int(input("  Please input a movieId: "))
             rating_dict["movieId"] = movieId
 
             print("請輸入電影評分 1~5 分")
-            rating = int(input("  Please input a rating: "))
+            #rating = int(input("  Please input a rating: "))
             rating_dict["rating"] = rating
 
             rating_list.append(rating_dict)
@@ -58,4 +58,5 @@ class Rating():
             else:
                 print("新增失敗")
             print("Execution result is {}".format(success))
-            return rating_list
+            #return rating_list
+            return result

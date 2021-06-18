@@ -2,13 +2,15 @@ from DB.DBConnection import DBConnection
 
 
 class User_info_Table:
-    def insert_a_user(self, userName:str):
-        command = "INSERT INTO User_info_Table (userName) VALUES  ('{}');".format(userName)
-            
+    def insert_a_user(self, userName:str, userPassword:str):
+        command = "INSERT INTO User_info_Table (userName, userPassword) VALUES  ('{}', '{}');".format(userName, userPassword)
+        
+
         with DBConnection() as connection:
             cursor = connection.cursor()
-            cursor.execute(command)
+            cursor.execute(command)  #這裡有錯誤
             connection.commit()
+
 
     def select_a_userId(self, userName:str):
         command = "SELECT * FROM User_info_Table WHERE userName='{}';".format(userName)
@@ -29,6 +31,16 @@ class User_info_Table:
             record_from_db = cursor.fetchall()
 
         return [row['userName'] for row in record_from_db]
+    
+    def select_a_userPassword(self, userId:int):
+        command = "SELECT * FROM User_info_Table WHERE userId='{}';".format(userId)
+
+        with DBConnection() as connection:
+            cursor = connection.cursor()
+            cursor.execute(command)
+            record_from_db = cursor.fetchall()
+
+        return [row['userPassword'] for row in record_from_db]
     
     def select_all_users(self):
         command = "SELECT * FROM User_info_Table;"

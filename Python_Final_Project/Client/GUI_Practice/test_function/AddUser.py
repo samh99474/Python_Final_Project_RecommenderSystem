@@ -3,14 +3,16 @@ class AddUser():
     def __init__(self, socket_client):
         self.socket_client = socket_client
 
-    def execute(self):
+    def execute(self, userName = None, userPassword = None):
         try:
             print("新增用戶姓名")
-            userName = str(input("  Please input a user's name: "))
+            #userName = str(input("  Please input a user's name: "))
             has_item = False
             add_user_dict = dict()
             query_user_dict = dict()
             query_user_dict["userName"] = userName
+            query_user_dict["userPassword"] = userPassword
+            print("query_user_dict : {}".format(query_user_dict))
 
             query_list_info = list()
             query_list_info.append(query_user_dict)
@@ -25,6 +27,7 @@ class AddUser():
             if result['status'] == "Fail":
                 print("此名稱不存在，您可以新增此學生")
                 add_user_dict["userName"] = userName  
+                add_user_dict["userPassword"] = userPassword
                 success = True
             else:
                 print("此名稱存在，您不可以新增此學生")
@@ -47,10 +50,13 @@ class AddUser():
                 if result['status'] == "OK":
                     print("    Add {} success".format(add_list_info))
                     print("新增成功")
+                    success = True
                 else:
                     print("    Add {} fail".format(add_list_info))
+                    success = False
             
             else:
                 print("新增失敗")
             print("Execution result is {}".format(success))
-            return query_user_dict
+            #return query_user_dict
+            return success

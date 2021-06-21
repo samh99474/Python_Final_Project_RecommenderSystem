@@ -22,11 +22,11 @@ Presentation video with the main functions of the user interface.
 <img src="./readme_Image/GUI_VideoPage.jpg"/>
 
 ## System Architecture ##
-<img src="./readme_Image/SystemArchitecture.jpg"/>
+<img src="./readme_Image/SystemArchitecture.png"/>
 
 ## Recommender System ##
-<img src="./readme_Image/RecommenderSystem-1.jpg"/>
-<img src="./readme_Image/RecommenderSystem-2.jpg"/>
-<img src="./readme_Image/RecommenderSystem-3.jpg"/>
-<img src="./readme_Image/RecommenderSystem-4.jpg"/>
-<img src="./readme_Image/RecommenderSystem-5.jpg"/>
+<img src="./readme_Image/RecommenderSystem-1.png"/>
+<img src="./readme_Image/RecommenderSystem-2.png"/>
+<img src="./readme_Image/RecommenderSystem-3.png"/>
+<img src="./readme_Image/RecommenderSystem-4.png"/>
+<img src="./readme_Image/RecommenderSystem-5.png"/>

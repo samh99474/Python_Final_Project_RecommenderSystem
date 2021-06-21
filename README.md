@@ -15,8 +15,11 @@ Presentation by 謝尚泓 Shang-Hong Xie and 陳良葳 Jeff.
 <br />2. Collaborative Filtering
 <br />3. Hybrid
 <br />The movie dataset is from Kaggle, and we convert the original CSV file to DB file so that we can process the data in SQLite
+<br />
+<br />Kaggle - The Movies Dataset:
+> 🔗 https://www.kaggle.com/rounakbanik/the-movies-dataset
 
-<br />As for GUI, we use pyqt6 to show the Socket Client interface(DB and RS is in Socket Server).
+<br />As for GUI, we use PyQt6 to show the Socket Client interface(DB and RS is in Socket Server).
 <br />Therefore User (client) can send a command to the server to request Movie information, user information, recommendation output list, and so on.
 <br /><img src="./readme_Image/GUI_HomePage.jpg"/>
 <br /><img src="./readme_Image/GUI_VideoPage.jpg"/>

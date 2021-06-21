@@ -9,7 +9,7 @@ socket client端
 """
 import socket 
 import json
-BUFFER_SIZE = 1940
+BUFFER_SIZE = 1048576
 
 host = "127.0.0.1"
 port = 20001

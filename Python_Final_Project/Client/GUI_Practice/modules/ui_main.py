@@ -1038,7 +1038,7 @@ class Ui_MainWindow(object):
 
         #設定row的數目
         #print("self.tableWidget_home.rowCount() : {}".format(self.tableWidget_home.rowCount()))
-        amount_row = 5
+        amount_row = 10
         if (self.tableWidget_home.rowCount() < amount_row):
             self.tableWidget_home.setRowCount(amount_row)
         #設定row的數目

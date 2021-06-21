@@ -1038,7 +1038,7 @@ class Ui_MainWindow(object):
 
         #設定row的數目
         #print("self.tableWidget_home.rowCount() : {}".format(self.tableWidget_home.rowCount()))
-        amount_row = 10
+        amount_row = 5
         if (self.tableWidget_home.rowCount() < amount_row):
             self.tableWidget_home.setRowCount(amount_row)
         #設定row的數目
@@ -1632,7 +1632,7 @@ class Ui_MainWindow(object):
         self.lineEdit_password = QLineEdit(self.row_login)
         self.lineEdit_password.setObjectName(u"lineEdit_password")
         self.lineEdit_password.setMinimumSize(QSize(0, 30))
-        #self.lineEdit_password.setEchoMode(QLineEdit.EchoMode.Password)
+        self.lineEdit_password.setEchoMode(QLineEdit.Password)
         self.lineEdit_password.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.lineEdit_password.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your password", None))
         self.gridLayout_login.addWidget(self.lineEdit_password, 5, 0, 1, 3)
@@ -1862,7 +1862,7 @@ class Ui_MainWindow(object):
         self.lineEdit_password2 = QLineEdit(self.row_sign_up)
         self.lineEdit_password2.setObjectName(u"lineEdit_password2")
         self.lineEdit_password2.setMinimumSize(QSize(0, 30))
-        #self.lineEdit_password2.setEchoMode(QLineEdit.EchoMode.Password)
+        self.lineEdit_password2.setEchoMode(QLineEdit.Password)
         self.lineEdit_password2.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.lineEdit_password2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your password", None))
         self.gridLayout_sign_up.addWidget(self.lineEdit_password2, 5, 0, 1, 3)
@@ -1877,7 +1877,7 @@ class Ui_MainWindow(object):
         self.lineEdit_password3 = QLineEdit(self.row_sign_up)
         self.lineEdit_password3.setObjectName(u"lineEdit_password3")
         self.lineEdit_password3.setMinimumSize(QSize(0, 30))
-        #self.lineEdit_password3.setEchoMode(QLineEdit.EchoMode.Password)
+        self.lineEdit_password3.setEchoMode(QLineEdit.Password)
         self.lineEdit_password3.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.lineEdit_password3.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type your password again", None))
         self.gridLayout_sign_up.addWidget(self.lineEdit_password3, 8, 0, 1, 3)

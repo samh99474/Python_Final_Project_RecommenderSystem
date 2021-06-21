@@ -1,7 +1,7 @@
-# Python Final Project - RecommenderSystem 電影推薦系統 #
+# Python Final Project - Movie Recommender System 電影推薦系統 #
 
 # YouTube - Project Presentation
-Presentation video with the main functions of the user interface.
+Presentation video with the main functions of the user interface by 謝尚泓 Shang-Hong Xie and 陳良葳 Jeff.
 > 🔗 https://www.youtube.com/watch?v=aSEBuPXpsd4
 
 ## Introduction ##
@@ -18,15 +18,15 @@ Presentation video with the main functions of the user interface.
 
 <br />As for GUI, we use pyqt6 to show the Socket Client interface(DB and RS is in Socket Server).
 <br />Therefore User (client) can send a command to the server to request Movie information, user information, recommendation output list, and so on.
-<img src="./readme_Image/GUI_HomePage.jpg"/>
-<img src="./readme_Image/GUI_VideoPage.jpg"/>
+<br /><img src="./readme_Image/GUI_HomePage.jpg"/>
+<br /><img src="./readme_Image/GUI_VideoPage.jpg"/>
 
 ## System Architecture ##
 <img src="./readme_Image/SystemArchitecture.png"/>
 
 ## Recommender System ##
 <img src="./readme_Image/RecommenderSystem-1.png"/>
-<img src="./readme_Image/RecommenderSystem-2.png"/>
-<img src="./readme_Image/RecommenderSystem-3.png"/>
-<img src="./readme_Image/RecommenderSystem-4.png"/>
-<img src="./readme_Image/RecommenderSystem-5.png"/>
+<img src="./readme_Image/RecommenderSystem-2.PNG"/>
+<img src="./readme_Image/RecommenderSystem-3.PNG"/>
+<img src="./readme_Image/RecommenderSystem-4.PNG"/>
+<img src="./readme_Image/RecommenderSystem-5.PNG"/>

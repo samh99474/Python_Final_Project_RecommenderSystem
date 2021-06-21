@@ -1,4 +1,4 @@
-# :clapper: Python Final Project - Movie Recommender System 電影推薦系統 #
+# :clapper:Python Final Project - Movie Recommender System 電影推薦系統 #
 
 # :heart: YouTube - Project Presentation
 Presentation video with the main functions of the user interface by 謝尚泓 Shang-Hong Xie and 陳良葳 Jeff.

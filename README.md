@@ -1,7 +1,7 @@
 # :clapper:Python Final Project - Movie Recommender System 電影推薦系統 #
 
-# :heart: YouTube - Project Presentation
-Presentation by 謝尚泓 Shang-Hong Xie and 陳良葳 Jeff.
+# :heart: YouTube - Project Presentation and Demo
+Presentation and demo by 謝尚泓 Shang-Hong Xie and 陳良葳 Jeff.
 > 🔗 https://www.youtube.com/watch?v=aSEBuPXpsd4
 
 ## :dart: Introduction ##
